@@ -16,8 +16,8 @@ public class TurretPIDSubsystem extends PIDSubsystem {
    * Creates a new TurretPIDSubsystem.
    */
 
-  private Encoder shootEncoder = new Encoder(sourceA, sourceB);
-  
+  // private Encoder shootEncoder = new Encoder(sourceA, sourceB);
+
   public TurretPIDSubsystem() {
     super(
         // The PIDController used by the subsystem

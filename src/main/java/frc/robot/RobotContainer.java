@@ -50,31 +50,31 @@ public class RobotContainer {
      * 
      * naming convention: d_* is diver controller, m_* is manipulator controller
      */
-    final JoystickButton d_aButton = new JoystickButton(driverController, 1);
-    final JoystickButton d_bButton = new JoystickButton(driverController, 2);
-    final JoystickButton d_xButton = new JoystickButton(driverController, 3);
-    final JoystickButton d_yButton = new JoystickButton(driverController, 4);
-    final JoystickButton d_dpadUp = new JoystickButton(driverController, 5);
-    final JoystickButton d_dpadRight = new JoystickButton(driverController, 6);
-    final JoystickButton d_dpadDown = new JoystickButton(driverController, 7);
-    final JoystickButton d_dpadLeft = new JoystickButton(driverController, 8);
-    final JoystickButton d_l2 = new JoystickButton(driverController, 9);
-    final JoystickButton d_r2 = new JoystickButton(driverController, 10);
-    final JoystickButton d_l1 = new JoystickButton(driverController, 11);
-    final JoystickButton d_r1 = new JoystickButton(driverController, 12);
+    // final JoystickButton d_aButton = new JoystickButton(driverController, 1);
+    // final JoystickButton d_bButton = new JoystickButton(driverController, 2);
+    // final JoystickButton d_xButton = new JoystickButton(driverController, 3);
+    // final JoystickButton d_yButton = new JoystickButton(driverController, 4);
+    // final JoystickButton d_dpadUp = new JoystickButton(driverController, 5);
+    // final JoystickButton d_dpadRight = new JoystickButton(driverController, 6);
+    // final JoystickButton d_dpadDown = new JoystickButton(driverController, 7);
+    // final JoystickButton d_dpadLeft = new JoystickButton(driverController, 8);
+    // final JoystickButton d_l2 = new JoystickButton(driverController, 9);
+    // final JoystickButton d_r2 = new JoystickButton(driverController, 10);
+    // final JoystickButton d_l1 = new JoystickButton(driverController, 11);
+    // final JoystickButton d_r1 = new JoystickButton(driverController, 12);
 
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, 1);
-    final JoystickButton m_bButton = new JoystickButton(manipulatorController, 2);
-    final JoystickButton m_xButton = new JoystickButton(manipulatorController, 3);
-    final JoystickButton m_yButton = new JoystickButton(manipulatorController, 4);
-    final JoystickButton m_dpadUp = new JoystickButton(manipulatorController, 5);
-    final JoystickButton m_dpadRight = new JoystickButton(manipulatorController, 6);
-    final JoystickButton m_dpadDown = new JoystickButton(manipulatorController, 7);
-    final JoystickButton m_dpadLeft = new JoystickButton(manipulatorController, 8);
-    final JoystickButton m_l2 = new JoystickButton(manipulatorController, 9);
-    final JoystickButton m_r2 = new JoystickButton(manipulatorController, 10);
-    final JoystickButton m_l1 = new JoystickButton(manipulatorController, 11);
-    final JoystickButton m_r1 = new JoystickButton(manipulatorController, 12);
+    // final JoystickButton m_bButton = new JoystickButton(manipulatorController, 2);
+    // final JoystickButton m_xButton = new JoystickButton(manipulatorController, 3);
+    // final JoystickButton m_yButton = new JoystickButton(manipulatorController, 4);
+    // final JoystickButton m_dpadUp = new JoystickButton(manipulatorController, 5);
+    // final JoystickButton m_dpadRight = new JoystickButton(manipulatorController, 6);
+    // final JoystickButton m_dpadDown = new JoystickButton(manipulatorController, 7);
+    // final JoystickButton m_dpadLeft = new JoystickButton(manipulatorController, 8);
+    // final JoystickButton m_l2 = new JoystickButton(manipulatorController, 9);
+    // final JoystickButton m_r2 = new JoystickButton(manipulatorController, 10);
+    // final JoystickButton m_l1 = new JoystickButton(manipulatorController, 11);
+    // final JoystickButton m_r1 = new JoystickButton(manipulatorController, 12);
 
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
   }
