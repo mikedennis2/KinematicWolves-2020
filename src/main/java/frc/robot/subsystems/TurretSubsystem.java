@@ -7,15 +7,16 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.*;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TurretSubsystem extends SubsystemBase {
   /**
    * Creates a new TurretSubsystem.
    */
 
-  public static WPI_TalonSRX shooterTalon = new WPI_TalonSRX(0); // This is the CAN ID for the device 
+  public static WPI_TalonSRX shooterTalon = new WPI_TalonSRX(3); // This is the CAN ID for the device 
 
   public TurretSubsystem() {
 
