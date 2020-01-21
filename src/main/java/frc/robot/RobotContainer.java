@@ -65,9 +65,9 @@ public class RobotContainer {
     // final JoystickButton d_r1 = new JoystickButton(driverController, 12);
 
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, 1);
-    // final JoystickButton m_bButton = new JoystickButton(manipulatorController, 2);
-    // final JoystickButton m_xButton = new JoystickButton(manipulatorController, 3);
-    // final JoystickButton m_yButton = new JoystickButton(manipulatorController, 4);
+    final JoystickButton m_bButton = new JoystickButton(manipulatorController, 2);
+    final JoystickButton m_xButton = new JoystickButton(manipulatorController, 3);
+    final JoystickButton m_yButton = new JoystickButton(manipulatorController, 4);
     // final JoystickButton m_dpadUp = new JoystickButton(manipulatorController, 5);
     // final JoystickButton m_dpadRight = new JoystickButton(manipulatorController, 6);
     // final JoystickButton m_dpadDown = new JoystickButton(manipulatorController, 7);
@@ -76,8 +76,10 @@ public class RobotContainer {
     // final JoystickButton m_r2 = new JoystickButton(manipulatorController, 10);
     // final JoystickButton m_l1 = new JoystickButton(manipulatorController, 11);
     // final JoystickButton m_r1 = new JoystickButton(manipulatorController, 12);
-
+    m_yButton.whileHeld(new ShootBall(m_turretSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
+    m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
+    m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
   }
 
 

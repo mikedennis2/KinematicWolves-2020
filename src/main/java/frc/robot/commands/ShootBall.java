@@ -48,6 +48,7 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_turretSubsystem.shootBall(0);
   }
 
   // Returns true when the command should end.
