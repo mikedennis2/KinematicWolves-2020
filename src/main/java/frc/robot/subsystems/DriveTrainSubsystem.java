@@ -24,7 +24,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public DriveTrainSubsystem() {
-        
+    rightSlave.follow(rightMaster);
+    leftSlave.follow(leftMaster);
   }
 
   @Override
