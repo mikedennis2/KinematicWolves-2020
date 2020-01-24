@@ -16,12 +16,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
    * Creates a new ExampleSubsystem.
    */
 
-  private WPI_VictorSPX rightMaster = new WPI_VictorSPX(1); // This is the CAN ID for the device
-  private WPI_VictorSPX rightSlave = new WPI_VictorSPX(3); // This is the CAN ID for the device
-  private WPI_VictorSPX leftMaster = new WPI_VictorSPX(4); // This is the CAN ID for the device
-  private WPI_VictorSPX leftSlave = new WPI_VictorSPX(2); // This is the CAN ID for the device
+  private final WPI_VictorSPX rightMaster = new WPI_VictorSPX(1); // This is the CAN ID for the device
+  private final WPI_VictorSPX rightSlave = new WPI_VictorSPX(3); // This is the CAN ID for the device
+  private final WPI_VictorSPX leftMaster = new WPI_VictorSPX(4); // This is the CAN ID for the device
+  private final WPI_VictorSPX leftSlave = new WPI_VictorSPX(2); // This is the CAN ID for the device
 
-  private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public DriveTrainSubsystem() {
     rightSlave.follow(rightMaster);
