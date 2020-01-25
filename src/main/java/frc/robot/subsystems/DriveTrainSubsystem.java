@@ -27,6 +27,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public DriveTrainSubsystem() {
+    rightSlave.setInverted(true);
+    rightMaster.setInverted(true);
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
   }
