@@ -41,6 +41,10 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  public Joystick getJoystick() {
+    return driverController;
+  }
+
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -82,6 +86,7 @@ public class RobotContainer {
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
     m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
+
   }
 
 
