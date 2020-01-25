@@ -4,13 +4,11 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.*;
-import edu.wpi.first.wpilibj.XboxController;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /**
@@ -33,7 +31,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leftSlave.follow(leftMaster);
   }
 
-  public void move_with_joysticks(XboxController driver_controller) {
+  public void move_with_joysticks(Joystick driver_controller) {
 
     // Get axis values for speed and rotational speed
     double xSpeed = driver_controller.getRawAxis(left_x_axis);
