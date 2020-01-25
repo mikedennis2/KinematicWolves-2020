@@ -11,8 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 
 /**
@@ -24,12 +26,13 @@ import frc.robot.subsystems.TurretSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
 
   // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Controllers
   private final Joystick driverController = new Joystick(0);
-  private final Joystick manipulatorController = new Joystick(1);
+  private final Joystick manipulatorController = new Joystick(1);  
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -37,6 +40,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+  }
+
+  public Joystick getJoystick() {
+    return driverController;
   }
 
   /**
@@ -80,6 +87,9 @@ public class RobotContainer {
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
     m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
+
+    m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
+
   }
 
 
