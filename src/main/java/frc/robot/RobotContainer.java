@@ -28,11 +28,10 @@ public class RobotContainer {
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
 
-  // private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   // Controllers
-  private final Joystick driverController = new Joystick(0);
-  private final Joystick manipulatorController = new Joystick(1);  
+  private final Joystick driverController = new Joystick(Constants.DRIVER_CONTROLLER);
+  private final Joystick manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);  
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -40,10 +39,15 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    setDefaultCommands();
   }
 
   public Joystick getJoystick() {
     return driverController;
+  }
+
+  public void setDefaultCommands(){
+    m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
   }
 
   /**
@@ -58,38 +62,16 @@ public class RobotContainer {
      * 
      * naming convention: d_* is diver controller, m_* is manipulator controller
      */
-    // final JoystickButton d_aButton = new JoystickButton(driverController, 1);
-    // final JoystickButton d_bButton = new JoystickButton(driverController, 2);
-    // final JoystickButton d_xButton = new JoystickButton(driverController, 3);
-    // final JoystickButton d_yButton = new JoystickButton(driverController, 4);
-    // final JoystickButton d_dpadUp = new JoystickButton(driverController, 5);
-    // final JoystickButton d_dpadRight = new JoystickButton(driverController, 6);
-    // final JoystickButton d_dpadDown = new JoystickButton(driverController, 7);
-    // final JoystickButton d_dpadLeft = new JoystickButton(driverController, 8);
-    // final JoystickButton d_l2 = new JoystickButton(driverController, 9);
-    // final JoystickButton d_r2 = new JoystickButton(driverController, 10);
-    // final JoystickButton d_l1 = new JoystickButton(driverController, 11);
-    // final JoystickButton d_r1 = new JoystickButton(driverController, 12);
 
-    final JoystickButton m_aButton = new JoystickButton(manipulatorController, 1);
-    final JoystickButton m_bButton = new JoystickButton(manipulatorController, 2);
-    final JoystickButton m_xButton = new JoystickButton(manipulatorController, 3);
-    final JoystickButton m_yButton = new JoystickButton(manipulatorController, 4);
-    // final JoystickButton m_dpadUp = new JoystickButton(manipulatorController, 5);
-    // final JoystickButton m_dpadRight = new JoystickButton(manipulatorController, 6);
-    // final JoystickButton m_dpadDown = new JoystickButton(manipulatorController, 7);
-    // final JoystickButton m_dpadLeft = new JoystickButton(manipulatorController, 8);
-    // final JoystickButton m_l2 = new JoystickButton(manipulatorController, 9);
-    // final JoystickButton m_r2 = new JoystickButton(manipulatorController, 10);
-    // final JoystickButton m_l1 = new JoystickButton(manipulatorController, 11);
-    // final JoystickButton m_r1 = new JoystickButton(manipulatorController, 12);
+    final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
+    final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
+    final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
+    final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
+    
     m_yButton.whileHeld(new ShootBall(m_turretSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
     m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
-
-    m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
-
   }
 
 
