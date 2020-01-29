@@ -22,6 +22,7 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry tx = table.getEntry("tx");
   private NetworkTableEntry ty = table.getEntry("ty");
   private NetworkTableEntry ta = table.getEntry("ta");
+  private NetworkTableEntry tv = table.getEntry("tv");
 
   public VisionSubsystem() {      
   }
@@ -38,17 +39,24 @@ public class VisionSubsystem extends SubsystemBase {
     return(y);
   }
 
-  // Limelight a
+  // Limelight area
   public double getA() {
     double a = ta.getDouble(0.0);
     return(a);
   }
 
+  // Limelist target detected flag
+  public boolean getV() {
+    boolean v = tv.getBoolean(false);
+    return(v);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("LimelightX", tx.getDouble(0.0));
-    // SmartDashboard.putNumber("LimelightY", ty.getDouble(0.0));
-    // SmartDashboard.putNumber("LimelightA", ta.getDouble(0.0));
+    // SmartDashboard.putNumber("LimelightX", getX());
+    // SmartDashboard.putNumber("LimelightY", getY());
+    // SmartDashboard.putNumber("LimelightA", getA());
+    // SmartDashboard.putBoolean("LimelightV", getV());
   }
 }
