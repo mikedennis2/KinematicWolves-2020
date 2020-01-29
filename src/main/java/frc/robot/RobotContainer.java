@@ -72,6 +72,9 @@ public class RobotContainer {
     m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
     m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
+
+    final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+
   }
 
 
