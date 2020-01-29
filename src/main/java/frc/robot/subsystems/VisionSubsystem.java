@@ -12,6 +12,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+import java.lang.Math;
+
 public class VisionSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
@@ -24,39 +26,54 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry ta = table.getEntry("ta");
   private NetworkTableEntry tv = table.getEntry("tv");
 
+  private final float A1 = (float)0.0;     // Measure, move to other class?
+  private final float H1 = (float)0.0;     // Measure, move to other class?
+  private final float H2 = (float)0.0;     // Measure, move to other class?
+
   public VisionSubsystem() {      
   }
 
   // Limelight x
-  public double getX() {
+  public double getHorizontalAngle() {
     double x = tx.getDouble(0.0);
     return(x);
   }
 
   // Limelight y
-  public double getY() {
+  public double getVerticalAngle() {
     double y = ty.getDouble(0.0);
     return(y);
   }
 
   // Limelight area
-  public double getA() {
+  public double getTargetArea() {
     double a = ta.getDouble(0.0);
     return(a);
   }
 
-  // Limelist target detected flag
-  public boolean getV() {
+  // Limelight target detected flag
+  public boolean getCaptureStatus() {
     boolean v = tv.getBoolean(false);
     return(v);
+  }
+
+  // Get distance to target
+  public double getDistance() {
+    double dist = -1;
+
+    if (getCaptureStatus()) {
+        dist = (H2-H1)/Math.tan(A1+getVerticalAngle());
+    }
+
+    return(dist);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("LimelightX", getX());
-    // SmartDashboard.putNumber("LimelightY", getY());
-    // SmartDashboard.putNumber("LimelightA", getA());
-    // SmartDashboard.putBoolean("LimelightV", getV());
+    // SmartDashboard.putNumber("LimelightHorizontalAngle", getHorizontalAngle());
+    // SmartDashboard.putNumber("LimelightVerticalAngle", getVerticalAngle());
+    // SmartDashboard.putNumber("LimelightArea", getTargetArea());
+    // SmartDashboard.putBoolean("LimelightCaptureStatus", getCaptureStatus());
   }
 }
