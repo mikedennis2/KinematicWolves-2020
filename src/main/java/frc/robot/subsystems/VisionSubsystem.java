@@ -27,8 +27,8 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry tv = table.getEntry("tv");
 
   private final float A1 = (float)0.0;     // Measure, move to other class?
-  private final float H1 = (float)0.0;     // Measure, move to other class?
-  private final float H2 = (float)0.0;     // Measure, move to other class?
+  private final float H1 = (float)5.01;     // Measure, move to other class?
+  private final float H2 = (float)6.1;     // Measure, move to other class?
 
   public VisionSubsystem() {      
   }
@@ -52,16 +52,16 @@ public class VisionSubsystem extends SubsystemBase {
   }
 
   // Limelight target detected flag
-  public boolean getCaptureStatus() {
-    boolean v = tv.getBoolean(false);
+  public double getCaptureStatus() {
+    double v = tv.getDouble(0.0);
     return(v);
   }
 
   // Get distance to target
   public double getDistance() {
     double dist = -1;
-
-    if (getCaptureStatus()) {
+    
+    if (getCaptureStatus() == 1.0) {
         dist = (H2-H1)/Math.tan(A1+getVerticalAngle());
     }
 
@@ -71,9 +71,10 @@ public class VisionSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // SmartDashboard.putNumber("LimelightHorizontalAngle", getHorizontalAngle());
-    // SmartDashboard.putNumber("LimelightVerticalAngle", getVerticalAngle());
-    // SmartDashboard.putNumber("LimelightArea", getTargetArea());
-    // SmartDashboard.putBoolean("LimelightCaptureStatus", getCaptureStatus());
+    SmartDashboard.putNumber("LimelightHorizontalAngle", getHorizontalAngle());
+    SmartDashboard.putNumber("LimelightVerticalAngle", getVerticalAngle());
+    SmartDashboard.putNumber("LimelightArea", getTargetArea());
+    SmartDashboard.putNumber("LimelightCaptureStatus", getCaptureStatus());
+    SmartDashboard.putNumber("LimelightCaptureDistance", getDistance());
   }
 }

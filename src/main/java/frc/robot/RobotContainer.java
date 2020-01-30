@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
-import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
 
 
 /**
@@ -27,7 +28,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
-
+  private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
 
   // Controllers
   private final Joystick driverController = new Joystick(Constants.DRIVER_CONTROLLER);
