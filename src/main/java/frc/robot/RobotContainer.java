@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
+import frc.robot.commands.ShiftGear;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -74,6 +75,8 @@ public class RobotContainer {
     m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
 
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+
+    d_aButton.whenPressed(new ShiftGear(m_driveTrain));
 
   }
 
