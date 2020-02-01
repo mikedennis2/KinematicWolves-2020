@@ -16,6 +16,7 @@ import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
 /**
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
   // Controllers
   private final Joystick driverController = new Joystick(Constants.DRIVER_CONTROLLER);
@@ -69,10 +71,10 @@ public class RobotContainer {
     final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
     
-    m_yButton.whileHeld(new ShootBall(m_turretSubsystem, 1.0));
-    m_aButton.whileHeld(new ShootBall(m_turretSubsystem, 0.8));
-    m_bButton.whileHeld(new ShootBall(m_turretSubsystem, 0.6));
-    m_xButton.whileHeld(new ShootBall(m_turretSubsystem, 0.4));
+    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
+    m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
+    m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
+    m_xButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.4));
   }
 
 
