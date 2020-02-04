@@ -51,6 +51,11 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
   }
 
+  public void setDisabledState(){
+    if (m_driveTrain.isHighGear){
+      new ShiftGear(m_driveTrain);
+    }
+  }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
