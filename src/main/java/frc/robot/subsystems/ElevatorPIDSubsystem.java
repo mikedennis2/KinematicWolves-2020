@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
-public class ShooterSubsystem extends PIDSubsystem {
+public class ElevatorPIDSubsystem extends PIDSubsystem {
   /**
-   * Creates a new ShooterSubsystem.
+   * Creates a new ElevatorPIDSubsystem.
    */
 
-  public static WPI_TalonSRX rotateShooterTalon = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR); // This is the CAN ID for the device 
-  public static WPI_TalonSRX spinShooterTalon = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR); // This is the CAN ID for the device 
-
-  public ShooterSubsystem() {
+  // private Encoder shootEncoder = new Encoder(sourceA, sourceB);
+  // Need two pneumatic actuators and a motor, probably control for the motor
+  
+  public ElevatorPIDSubsystem() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
@@ -36,9 +36,5 @@ public class ShooterSubsystem extends PIDSubsystem {
   public double getMeasurement() {
     // Return the process variable measurement here
     return 0;
-  }
-
-  public void shootBall(double speed){
-    spinShooterTalon.set(speed);
   }
 }
