@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterPIDSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 
@@ -28,7 +28,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final ShooterPIDSubsystem m_shooterPIDSubsystem = new ShooterPIDSubsystem();
 
 
   // Controllers
@@ -70,10 +70,10 @@ public class RobotContainer {
     final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
     
-    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
-    m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
-    m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
-    m_xButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.4));
+    m_yButton.whileHeld(new ShootBall(m_shooterPIDSubsystem, 1.0));
+    m_aButton.whileHeld(new ShootBall(m_shooterPIDSubsystem, 0.8));
+    m_bButton.whileHeld(new ShootBall(m_shooterPIDSubsystem, 0.6));
+    m_xButton.whileHeld(new ShootBall(m_shooterPIDSubsystem, 0.4));
   }
 
 
