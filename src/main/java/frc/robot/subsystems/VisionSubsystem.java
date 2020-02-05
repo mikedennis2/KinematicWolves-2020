@@ -59,24 +59,28 @@ public class VisionSubsystem extends SubsystemBase {
       0.0008171388625648901
   };
 
-  private LinearFilter filter = new LinearFilter(ffGains, null);
+  private LinearFilter filter_d = new LinearFilter(ffGains, null);
+  private LinearFilter filter_ha = new LinearFilter(ffGains, null);
+  private LinearFilter filter_va = new LinearFilter(ffGains, null);
 
   private double filtered_distance;
   private double distance;
-
+  private double filtered_h_angle;
+  private double h_angle;
+  private double filtered_v_angle;
+  private double v_angle;
+  
   public VisionSubsystem() {      
   }
 
   // Limelight x
   public double getHorizontalAngle() {
-    double x = tx.getDouble(0.0);
-    return(x);
+    return(h_angle);
   }
 
   // Limelight y
   public double getVerticalAngle() {
-    double y = ty.getDouble(0.0);
-    return(y);
+    return(v_angle);
   }
 
   // Limelight area
@@ -107,6 +111,16 @@ public class VisionSubsystem extends SubsystemBase {
     return(distance);
   }
 
+  // Return filtered horizontal angle
+  public double getFilteredHorizontalAngle() {
+    return(filtered_h_angle);
+  }
+
+  // Return filtered vertical angle
+  public double getFilteredVerticalAngle() {
+    return(filtered_v_angle);
+  }
+
   // Return filtered distance
   public double getFilteredDistance() {
     return(filtered_distance);
@@ -114,15 +128,21 @@ public class VisionSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    distance = calculateDistance();
-    filtered_distance = filter.calculate(distance);
-
     // This method will be called once per scheduler run
+    distance = calculateDistance();
+    filtered_distance = filter_d.calculate(distance);
+    h_angle = tx.getDouble(0.0);
+    filtered_h_angle = filter_ha.calculate(h_angle);
+    v_angle = ty.getDouble(0.0);
+    filtered_v_angle = filter_va.calculate(v_angle);
+
     SmartDashboard.putNumber("LimelightHorizontalAngle", getHorizontalAngle());
     SmartDashboard.putNumber("LimelightVerticalAngle", getVerticalAngle());
     SmartDashboard.putNumber("LimelightArea", getTargetArea());
     SmartDashboard.putNumber("LimelightCaptureStatus", getCaptureStatus());
     SmartDashboard.putNumber("LimelightDistance", distance);
     SmartDashboard.putNumber("LimelightFilteredDistance", filtered_distance);
+    SmartDashboard.putNumber("LimelightFilteredHorizontalAngle", filtered_h_angle);
+    SmartDashboard.putNumber("LimelightFilteredVerticalAngle", filtered_v_angle);
   }
 }
