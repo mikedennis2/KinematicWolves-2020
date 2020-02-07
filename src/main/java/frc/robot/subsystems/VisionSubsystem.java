@@ -59,9 +59,11 @@ public class VisionSubsystem extends SubsystemBase {
       0.0008171388625648901
   };
 
-  private LinearFilter filter_d = new LinearFilter(ffGains, null);
-  private LinearFilter filter_ha = new LinearFilter(ffGains, null);
-  private LinearFilter filter_va = new LinearFilter(ffGains, null);
+  private double[] fbGains = {};
+
+  private LinearFilter filter_d = new LinearFilter(ffGains, fbGains);
+  private LinearFilter filter_ha = new LinearFilter(ffGains, fbGains);
+  private LinearFilter filter_va = new LinearFilter(ffGains, fbGains);
 
   private double filtered_distance;
   private double distance;
