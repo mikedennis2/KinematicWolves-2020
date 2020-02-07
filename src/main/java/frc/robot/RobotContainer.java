@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -74,7 +75,7 @@ public class RobotContainer {
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
-    m_xButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.4));
+    m_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
   }
 
 

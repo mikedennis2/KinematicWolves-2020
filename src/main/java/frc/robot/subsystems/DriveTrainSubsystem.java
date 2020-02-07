@@ -4,7 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -45,4 +44,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
+  public void align_with_target(double zRotation_rate){
+    drive.arcadeDrive(0, zRotation_rate);
+
+  }
+
+  
 }
