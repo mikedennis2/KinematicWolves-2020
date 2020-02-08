@@ -75,6 +75,7 @@ public class RobotContainer {
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
+    
     m_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
   }
 

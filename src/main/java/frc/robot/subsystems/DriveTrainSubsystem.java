@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class DriveTrainSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
@@ -38,6 +40,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double zRotation_rate = driver_controller.getRawAxis(Constants.left_y_axis);
 
     drive.arcadeDrive(xSpeed, zRotation_rate);
+
+    SmartDashboard.putNumber("X speed commanded by driver", driver_controller.getRawAxis(Constants.left_x_axis));
+    SmartDashboard.putNumber("zRotation Rate Commanded by driver", driver_controller.getRawAxis(Constants.left_y_axis));
   }
 
   @Override
@@ -46,6 +51,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void align_with_target(double zRotation_rate){
+    SmartDashboard.putNumber("zRotation commanded by controller", zRotation_rate);
+    if (zRotation_rate > 0.4){
+      zRotation_rate = 0.4;
+    }
     drive.arcadeDrive(0, zRotation_rate);
 
   }

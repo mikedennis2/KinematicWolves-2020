@@ -61,8 +61,8 @@ public final class Constants {
     // Elevation system controller CAN IDs
 
     // Controller constants
-    public static final double visionKp = 1.1;
-    public static final double visionKi = 1.8;
+    public static final double visionKp = 0.10;
+    public static final double visionKi = 0.0;
     public static final double visionKd = 0.0;
     public static final double alignment_x_tolerance = 0.5;
 
