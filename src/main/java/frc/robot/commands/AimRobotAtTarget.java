@@ -20,7 +20,6 @@ public class AimRobotAtTarget extends PIDCommand {
   /**
    * Creates a new AimRobotAtTarget.
    */
-public VisionSubsystem m_visionSubsystem;
 
   public AimRobotAtTarget(double targetAngle, VisionSubsystem m_visionSubsystem, DriveTrainSubsystem m_drivetrain) {
     super(
@@ -47,11 +46,6 @@ public VisionSubsystem m_visionSubsystem;
   // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        // if (m_visionSubsystem.getCaptureStatus() == 1) {
-        //     return getController().atSetpoint();
-        // } else {
-        //     return true;
-        // }
         return getController().atSetpoint();
 
     }
