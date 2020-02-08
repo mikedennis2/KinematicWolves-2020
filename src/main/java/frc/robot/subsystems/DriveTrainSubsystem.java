@@ -26,8 +26,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public DriveTrainSubsystem() {      
+    leftSlave.setInverted(false);
+    leftMaster.setInverted(false);
+    
     rightSlave.setInverted(true);
     rightMaster.setInverted(true);
+
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
 
@@ -53,7 +57,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void align_with_target(double zRotation_rate){
     SmartDashboard.putNumber("zRotation commanded by controller", zRotation_rate);
     if (zRotation_rate > 0.4){
-      zRotation_rate = 0.4;
+      zRotation_rate = 0.6;
     }
     drive.arcadeDrive(0, zRotation_rate);
 

@@ -71,12 +71,14 @@ public class RobotContainer {
     final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
     final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
+
+    final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
     
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
     
-    m_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
+    d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
   }
 
 
