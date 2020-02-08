@@ -41,16 +41,18 @@ public VisionSubsystem m_visionSubsystem;
 
     // Configure additional PID options by calling `getController` here.
     getController().setTolerance(Constants.alignment_x_tolerance);
+    System.out.println("Command recognized");
   }
 
   // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (m_visionSubsystem.getCaptureStatus() == 1) {
-            return getController().atSetpoint();
-        } else {
-            return true;
-        }
+        // if (m_visionSubsystem.getCaptureStatus() == 1) {
+        //     return getController().atSetpoint();
+        // } else {
+        //     return true;
+        // }
+        return getController().atSetpoint();
 
     }
 }

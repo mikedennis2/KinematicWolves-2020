@@ -26,8 +26,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
   public DriveTrainSubsystem() {      
-    leftSlave.setInverted(true);
-    leftMaster.setInverted(true);
+    leftSlave.setInverted(false);
+    leftMaster.setInverted(false);
     
     rightSlave.setInverted(false);
     rightMaster.setInverted(false);
@@ -40,8 +40,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void move_with_joysticks(Joystick driver_controller) {
 
     // Get axis values for speed and rotational speed
-    double xSpeed = driver_controller.getRawAxis(Constants.left_x_axis);
-    double zRotation_rate = driver_controller.getRawAxis(Constants.left_y_axis);
+    double xSpeed = driver_controller.getRawAxis(Constants.left_y_axis);
+    double zRotation_rate = -1*driver_controller.getRawAxis(Constants.left_x_axis);
 
     drive.arcadeDrive(xSpeed, zRotation_rate);
 
@@ -55,9 +55,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void align_with_target(double zRotation_rate){
+    double clip_pid_speed = Constants.visionPID_Clip;
     SmartDashboard.putNumber("zRotation commanded by controller", zRotation_rate);
-    if (zRotation_rate > 0.4){
-      zRotation_rate = 0.6;
+    if (zRotation_rate > clip_pid_speed){
+      zRotation_rate = clip_pid_speed;
+    }
+
+    if (zRotation_rate < -clip_pid_speed){
+      zRotation_rate = -clip_pid_speed;
     }
     drive.arcadeDrive(0, zRotation_rate);
 
