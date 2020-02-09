@@ -29,6 +29,11 @@ public class ShooterSubsystem extends SubsystemBase {
     spinShooterTalon.set(speed);
   }
 
+  public void spinFeederWheels(double speed){
+    rotateShooterTalon_1.set(speed);
+    rotateShooterTalon_1.set(-speed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
