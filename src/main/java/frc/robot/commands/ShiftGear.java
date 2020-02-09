@@ -7,31 +7,28 @@
 
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
-import frc.robot.Robot;
-import frc.robot.subsystems.ShooterSubsystem;
-
-
-public class ShootBall extends CommandBase {
+public class ShiftGear extends CommandBase {
   /**
-   * Creates a new ShootBall.
+   * Creates a new ShiftGear.
    */
-  private double speed = 0.8;
 
-  // The subsystem the command runs on
-  private final ShooterSubsystem m_shooterSubsystem;
+    // private double time = 0.5;
 
-  public ShootBall(ShooterSubsystem subsystem, double speed) {
+    // The subsytem command runs on the following:
+    private final DriveTrainSubsystem m_drivetrain_subsystem;
+
+  public ShiftGear(DriveTrainSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_shooterSubsystem = subsystem;
-    addRequirements(m_shooterSubsystem);
-    this.speed = speed;
+    m_drivetrain_subsystem = subsystem;
+    addRequirements(m_drivetrain_subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooterSubsystem.shootBall(speed);
+    m_drivetrain_subsystem.shiftGear();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,12 +39,11 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.shootBall(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

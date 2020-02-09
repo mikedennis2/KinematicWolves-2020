@@ -14,6 +14,10 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
+
+import frc.robot.commands.ShiftGear;
+import frc.robot.subsystems.TurretSubsystem;
+
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 import frc.robot.subsystems.TurretSubsystem;
@@ -56,6 +60,11 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
   }
 
+  public void setDisabledState(){
+    if (m_driveTrain.isHighGear){
+      new ShiftGear(m_driveTrain);
+    }
+  }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -79,8 +88,12 @@ public class RobotContainer {
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
     m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
-    
+
+    final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+
+    d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
+
 
   }
 
