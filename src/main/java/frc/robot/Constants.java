@@ -39,20 +39,38 @@ public final class Constants {
     public static final int left_y_axis = 1;
 
     // Drivetrain controller CAN IDs
-    public static final int RIGHT_MOTOR_1 = 1;
-    public static final int RIGHT_MOTOR_2 = 3;
-    public static final int LEFT_MOTOR_1 = 2;
-    public static final int LEFT_MOTOR_2 = 4;
+  // Used for Chassis Bot
+//     public static final int RIGHT_MOTOR_1 = 1;
+//     public static final int RIGHT_MOTOR_2 = 3;
+//     public static final int LEFT_MOTOR_1 = 2;
+//     public static final int LEFT_MOTOR_2 = 4;
     public static final int DRVTRN_SOL_FWD_CHN = 0;
     public static final int DRVTRN_SOL_RVS_CHN = 1;
 
-    // Shooter controller CAN IDs
+    public static final int RIGHT_MOTOR_1 = 6;
+    public static final int RIGHT_MOTOR_2 = 7;
+    public static final int LEFT_MOTOR_1 = 4;
+    public static final int LEFT_MOTOR_2 = 5;
 
+
+    // This does not exist yet!
+    public static final int ROTATE_TURRET_MOTOR = 10; 
+   
+    // Shooter controller CAN IDs
+    public static final int ROTATE_SHOOTER_MOTOR_1 = 11;
+    public static final int ROTATE_SHOOTER_MOTOR_2 = 13;
+    public static final int SPIN_SHOOTER_MOTOR = 12;
 
     // Turret controller CAN IDs
 
 
     // Elevation system controller CAN IDs
 
+    // Controller constants
+    public static final double visionPID_Clip = 0.4;
+    public static final double visionKp = 0.4;
+    public static final double visionKi = 0.5;
+    public static final double visionKd = 0.25;
+    public static final double alignment_x_tolerance = 0.05;
 
 }

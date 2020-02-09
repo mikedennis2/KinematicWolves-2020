@@ -7,24 +7,26 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class TurretSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends SubsystemBase {
   /**
-   * Creates a new TurretSubsystem.
+   * Creates a new ShooterSubsystem.
    */
 
-  public static WPI_TalonSRX rotateTurretTalon = new WPI_TalonSRX(Constants.ROTATE_TURRET_MOTOR); // This is the CAN ID for the device 
+  public static WPI_TalonSRX rotateShooterTalon_1 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
+  public static WPI_TalonSRX rotateShooterTalon_2 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
+  public static WPI_TalonSRX spinShooterTalon = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR); // This is the CAN ID for the device 
 
-  public TurretSubsystem() {
+  public ShooterSubsystem(){
 
   }
 
-  public void rotateTurret(double speed){
-    rotateTurretTalon.set(speed);
+  public void shootBall(double speed){
+    spinShooterTalon.set(speed);
   }
 
   @Override
