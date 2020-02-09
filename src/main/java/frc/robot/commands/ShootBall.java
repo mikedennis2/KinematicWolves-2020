@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.Robot;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShooterPIDSubsystem;
 
 public class ShootBall extends CommandBase {
   /**
@@ -19,19 +19,19 @@ public class ShootBall extends CommandBase {
   private double speed = 0.8;
 
   // The subsystem the command runs on
-  private final ShooterSubsystem m_shooterSubsystem;
+  private final ShooterPIDSubsystem m_shooterPIDSubsystem;
 
-  public ShootBall(ShooterSubsystem subsystem, double speed) {
+  public ShootBall(ShooterPIDSubsystem subsystem, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_shooterSubsystem = subsystem;
-    addRequirements(m_shooterSubsystem);
+    m_shooterPIDSubsystem = subsystem;
+    addRequirements(m_shooterPIDSubsystem);
     this.speed = speed;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooterSubsystem.shootBall(speed);
+    m_shooterPIDSubsystem.shootBall(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,7 +42,7 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.shootBall(0);
+    m_shooterPIDSubsystem.shootBall(0);
   }
 
   // Returns true when the command should end.
