@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShootBall;
-
+import frc.robot.commands.TurnLeftShootTarget;
 import frc.robot.commands.ShiftGear;
 import frc.robot.subsystems.TurretSubsystem;
 
@@ -90,9 +90,11 @@ public class RobotContainer {
     m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
 
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+    final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
 
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
+    d_bButton.whenPressed(new TurnLeftShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
 
 
   }
