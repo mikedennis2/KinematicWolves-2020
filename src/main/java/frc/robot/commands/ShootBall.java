@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.VisionSubsystem;;
+import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.Utilities;
 
 
@@ -17,8 +17,7 @@ public class ShootBall extends CommandBase {
   /**
    * Creates a new ShootBall.
    */
-  private double speed;
-  private double distance;
+
 
   double[] distances = {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
