@@ -27,9 +27,9 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry ta = table.getEntry("ta");
   private NetworkTableEntry tv = table.getEntry("tv");
 
-  private final float A1 = (float)0.0;     // Measure, move to other class?
-  private final float H1 = (float)5.01;     // Measure, move to other class?
-  private final float H2 = (float)6.1;     // Measure, move to other class?
+  private final float A1 = (float)0.0;
+  private final float H1 = (float)49;
+  private final float H2 = (float)(28+64);   // Calibrate this parameter
 
   private double[] ffGains = {
       0.0008171388625648901,
@@ -102,7 +102,7 @@ public class VisionSubsystem extends SubsystemBase {
     double dist = -1;
     
     if (getCaptureStatus() == 1.0) {
-        dist = (H2-H1)/Math.tan(A1+getVerticalAngle());
+        dist = (H2-H1)/Math.tan(Math.PI*(A1+getVerticalAngle())/180);
     }
 
     return(dist);
