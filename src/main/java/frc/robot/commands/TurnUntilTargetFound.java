@@ -32,18 +32,19 @@ public class TurnUntilTargetFound extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (direction) {
-            // Rotate in the positive direction, clockwise
-            m_drivetrain.rotateDrivetrain(rotatationRate);
-        } else {
-            // Rotate in the negative direction, counter-clockwise
-            m_drivetrain.rotateDrivetrain(-1 * rotatationRate);
-        }
+        
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if (direction) {
+            // Rotate in the positive direction, clockwise
+            m_drivetrain.rotateDrivetrain(-1 * rotatationRate);
+        } else {
+            // Rotate in the negative direction, counter-clockwise
+            m_drivetrain.rotateDrivetrain(rotatationRate);
+        }
     }
 
     // Called once the command ends or is interrupted.
