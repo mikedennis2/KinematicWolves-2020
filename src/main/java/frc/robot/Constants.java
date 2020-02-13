@@ -57,9 +57,10 @@ public final class Constants {
     public static final int ROTATE_TURRET_MOTOR = 10; 
    
     // Shooter controller CAN IDs
-    public static final int ROTATE_SHOOTER_MOTOR_1 = 11;
-    public static final int ROTATE_SHOOTER_MOTOR_2 = 13;
-    public static final int SPIN_SHOOTER_MOTOR = 12;
+    public static final int ROTATE_SHOOTER_MOTOR_1 = 14;
+    public static final int ROTATE_SHOOTER_MOTOR_2 = 15;
+    public static final int SPIN_SHOOTER_MOTOR_1 = 12;
+    public static final int SPIN_SHOOTER_MOTOR_2 = 13;
 
     // Turret controller CAN IDs
 

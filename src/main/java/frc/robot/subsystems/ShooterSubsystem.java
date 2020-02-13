@@ -17,21 +17,23 @@ public class ShooterSubsystem extends SubsystemBase {
    * Creates a new ShooterSubsystem.
    */
 
-  public static WPI_TalonSRX rotateShooterTalon_1 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
-  public static WPI_TalonSRX rotateShooterTalon_2 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
-  public static WPI_TalonSRX spinShooterTalon = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR); // This is the CAN ID for the device 
+  public static WPI_TalonSRX feederTalon_1 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
+  public static WPI_TalonSRX feederTalon_2 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
+  public static WPI_TalonSRX spinShooterTalon_1 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
+  public static WPI_TalonSRX spinShooterTalon_2 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
 
   public ShooterSubsystem(){
 
   }
 
   public void shootBall(double speed){
-    spinShooterTalon.set(speed);
+    spinShooterTalon_1.set(speed);
+    spinShooterTalon_2.set(speed);
   }
 
   public void spinFeederWheels(double speed){
-    rotateShooterTalon_1.set(speed);
-    rotateShooterTalon_1.set(-speed);
+    feederTalon_1.set(speed);
+    feederTalon_2.set(-speed);
   }
 
   @Override
