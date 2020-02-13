@@ -28,8 +28,8 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry tv = table.getEntry("tv");
 
   private final float A1 = (float)0.0;     // Measure, move to other class?
-  private final float H1 = (float)5.01;     // Measure, move to other class?
-  private final float H2 = (float)6.1;     // Measure, move to other class?
+  private final float H1 = (float)49;     // Measure, move to other class?
+  private final float H2 = (float)(28 + 64);     // Measure, move to other class?
 
   private double[] ffGains = {
       0.0008171388625648901,

@@ -99,5 +99,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   }
 
+  public void drive_to_distance(double speed){
+    drive.arcadeDrive(speed,0 );
+  }
+
   
 }
