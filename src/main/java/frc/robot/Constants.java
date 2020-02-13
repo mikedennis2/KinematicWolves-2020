@@ -73,4 +73,7 @@ public final class Constants {
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
 
+    // Trajectory following parameters
+    public static final double TrackWidth = 23.75; // inches
+
 }
