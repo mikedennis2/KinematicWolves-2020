@@ -4,16 +4,22 @@
 
 package frc.robot.subsystems;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Units;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /**
@@ -26,13 +32,19 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final WPI_VictorSPX rightSlave = new WPI_VictorSPX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
   private final WPI_VictorSPX leftMaster = new WPI_VictorSPX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
   private final WPI_VictorSPX leftSlave = new WPI_VictorSPX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
-  
+  private final ADIS16448_IMU imu = new ADIS16448_IMU();
+
   private final DoubleSolenoid DriveTrainSwitch = new DoubleSolenoid(Constants.DRVTRN_SOL_FWD_CHN, Constants.DRVTRN_SOL_RVS_CHN); // This is the definition of the solenoid for switching gears in the drivetrain 
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
+  private final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(Constants.TrackWidth));
+  private final DifferentialDriveOdometry odometry;
 
   public DriveTrainSubsystem() {      
+    
+    imu.reset();
+
     leftSlave.setInverted(false);
     leftMaster.setInverted(false);
     
@@ -41,6 +53,26 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
+
+    odometry = new DifferentialDriveOdometry(GetAngle());
+
+  }
+
+  public Rotation2d GetAngle() {
+
+    return Rotation2d.fromDegrees(-imu.getAngle());
+
+  }
+
+  public DifferentialDriveWheelSpeeds GetSpeeds() {
+
+    return new DifferentialDriveWheelSpeeds();
+
+  }
+
+  public void updateOdometry() {
+
+    m_odometry.update(GetAngle(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
 
   }
 
