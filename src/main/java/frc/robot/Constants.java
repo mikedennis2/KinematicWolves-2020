@@ -52,6 +52,11 @@ public final class Constants {
     public static final int LEFT_MOTOR_1 = 4;
     public static final int LEFT_MOTOR_2 = 5;
 
+    public static final int LEFT_ENCODER_channel1A = 0;
+    public static final int LEFT_ENCODER_channel1B = 1;
+    public static final int RIGHT_ENCODER_channel1A = 2;
+    public static final int RIGHT_ENCODER_channel1B = 3;
+
 
     // This does not exist yet!
     public static final int ROTATE_TURRET_MOTOR = 10; 
@@ -75,5 +80,14 @@ public final class Constants {
 
     // Trajectory following parameters
     public static final double TrackWidth = 23.75; // inches
+    public static final double WheelRadius = 8.00; // inches
+    public static final double TBD = 1.0; // inches
+    public static final double EncoderResolution = 4096; // number of pulses per revolution
+    public static final double GR1 = 9.0; // 1st gear ratio
+    public static final double GR2 = 9.0; // 2nd gear ratio
+    public static final double RobotCharacterization_kS = 0.3; // static gain
+    public static final double RobotCharacterization_kV = 1.96; // velocity gain
+    public static final double RobotCharacterization_kA = 0.06; // acceleration gain
+    public static final double Traj_Following_Feedback_P_Gain = 2.95; // P gain for PID
 
 }
