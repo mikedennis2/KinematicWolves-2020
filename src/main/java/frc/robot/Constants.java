@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import frc.robot.utils.HermitClampedCubicPath;
+import java.util.ArrayList;
+import edu.wpi.first.wpilibj.geometry.*;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -73,4 +77,24 @@ public final class Constants {
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
 
+    // Array list that holds trajectories
+    public static ArrayList<HermitClampedCubicPath> TRAJ_LIST = new ArrayList<HermitClampedCubicPath>();
+
+    Constants() {
+      // Define path 1
+      Pose2d startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+      Pose2d endPose = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
+      ArrayList<Translation2d> interiorWaypoints = new ArrayList<Translation2d>();
+      interiorWaypoints.add(new Translation2d(0.5,1.0));
+      interiorWaypoints.add(new Translation2d(1.5,1.0));
+      TRAJ_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+
+      // Define path 1
+      startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+      endPose = new Pose2d(new Translation2d(3.0,-2.0), Rotation2d.fromDegrees(180));
+      interiorWaypoints = new ArrayList<Translation2d>();
+      interiorWaypoints.add(new Translation2d(1.5,-1.0));
+      interiorWaypoints.add(new Translation2d(1.5,-2.0));
+      TRAJ_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+    }
 }
