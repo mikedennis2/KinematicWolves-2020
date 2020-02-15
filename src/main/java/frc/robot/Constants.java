@@ -78,7 +78,7 @@ public final class Constants {
     public static final double alignment_x_tolerance = 0.05;
 
     // Array list that holds trajectories
-    public static ArrayList<HermitClampedCubicPath> TRAJ_LIST = new ArrayList<HermitClampedCubicPath>();
+    public static ArrayList<HermitClampedCubicPath> PATH_LIST = new ArrayList<HermitClampedCubicPath>();
 
     Constants() {
       // Define path 1
@@ -87,7 +87,7 @@ public final class Constants {
       ArrayList<Translation2d> interiorWaypoints = new ArrayList<Translation2d>();
       interiorWaypoints.add(new Translation2d(0.5,1.0));
       interiorWaypoints.add(new Translation2d(1.5,1.0));
-      TRAJ_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
 
       // Define path 1
       startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
@@ -95,6 +95,6 @@ public final class Constants {
       interiorWaypoints = new ArrayList<Translation2d>();
       interiorWaypoints.add(new Translation2d(1.5,-1.0));
       interiorWaypoints.add(new Translation2d(1.5,-2.0));
-      TRAJ_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
     }
 }

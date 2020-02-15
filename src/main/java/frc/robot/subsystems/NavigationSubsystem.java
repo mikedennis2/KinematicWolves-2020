@@ -21,7 +21,7 @@ public class NavigationSubsystem extends SubsystemBase {
   public Trajectory getTrajectory(int index) {
     config = new TrajectoryConfig(3.5,3.5); 
     config.setReversed(true);        
-    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Constants.TRAJ_LIST.get(index).getStartPose(),Constants.TRAJ_LIST.get(index).getWayPoints(),Constants.TRAJ_LIST.get(index).getEndPose(),config);
+    Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Constants.PATH_LIST.get(index).getStartPose(),Constants.PATH_LIST.get(index).getWayPoints(),Constants.PATH_LIST.get(index).getEndPose(),config);
 
     return(trajectory);
   }
