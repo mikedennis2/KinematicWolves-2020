@@ -55,6 +55,9 @@ public final class Constants {
 
     // This does not exist yet!
     public static final int ROTATE_TURRET_MOTOR = 10; 
+    public static final int TOP_CONVEYOR_MOTOR = 26;
+    public static final int LOWER_CONVEYOR_MOTOR = 27;
+    public static final int INTAKE_MOTOR = 28;
    
     // Shooter controller CAN IDs
     public static final int ROTATE_SHOOTER_MOTOR_1 = 14;
