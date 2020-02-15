@@ -32,6 +32,7 @@ public class AdjustShooterAngle extends CommandBase {
     m_visionSubsystem = visionSubsytem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem);
+    
   }
 
   // Called when the command is initially scheduled.
