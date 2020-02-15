@@ -20,13 +20,13 @@ public class ShootBall extends CommandBase {
 
 
   double[] distances = {
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14
   }; // feet, need to change to inches
 
   double[] speeds = {
-    0.66, 0.68, 0.70, 0.75, 0.75, 0.75, 0.80, 0.90, 0.90, 0.90, 0.90, 0.90
+    0.66, 0.68, 0.70, 0.75, 0.75, 0.75, 0.80, 0.90, 0.90, 0.90, 0.90, 0.90, 0.90
   };
-
+  
   // The subsystem the command runs on
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
@@ -44,8 +44,8 @@ public class ShootBall extends CommandBase {
   @Override
   public void initialize() {
     
-    // double distance = m_visionSubsystem.getDistance(); // TODO: Units, to be inches
-    double distance = 10; // feet
+    // double distance = m_visionSubsystem.getDistance(); // TOD O: Units, to be inches
+    double distance = 4; // feet
     double speed = Utilities.linearInterpolation(distances, speeds, distance);
     System.out.print("Speed calculated by table:");
     System.out.print(speed);
