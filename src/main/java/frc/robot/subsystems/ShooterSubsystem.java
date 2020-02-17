@@ -9,29 +9,66 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import java.lang.Math;
 
 public class ShooterSubsystem extends SubsystemBase {
   /**
    * Creates a new ShooterSubsystem.
    */
 
-  public static WPI_TalonSRX rotateShooterTalon_1 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
-  public static WPI_TalonSRX rotateShooterTalon_2 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
-  public static WPI_TalonSRX spinShooterTalon = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR); // This is the CAN ID for the device 
+  public static WPI_TalonSRX feederTalon_1 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
+  public static WPI_TalonSRX feederTalon_2 = new WPI_TalonSRX(Constants.ROTATE_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
+  public static WPI_TalonSRX spinShooterTalon_1 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
+  public static WPI_TalonSRX spinShooterTalon_2 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
+
+  public static Servo angleActuator_1 = new Servo(Constants.LINEAR_ACTUATOR_1); // PWM controlled
+  public static Servo angleActuator_2 = new Servo(Constants.LINEAR_ACTUATOR_2); // PWM controlled
 
   public ShooterSubsystem(){
 
   }
 
   public void shootBall(double speed){
-    spinShooterTalon.set(speed);
+    spinShooterTalon_1.set(speed);
+    spinShooterTalon_2.set(speed);
   }
 
   public void spinFeederWheels(double speed){
-    rotateShooterTalon_1.set(speed);
-    rotateShooterTalon_1.set(-speed);
+    feederTalon_1.set(speed);
+    feederTalon_2.set(-speed);
+  }
+
+  public void setLinearActuatorPosition(double position){
+    // Check to make sure position is not out of bounds
+    position = clipLinearActuatorPositionCommand(position);
+    angleActuator_1.set(position);
+    angleActuator_2.set(position);
+
+  }
+
+  private double clipLinearActuatorPositionCommand(double position){
+    // Make sure command does not exceed the hardware limit
+    if (position > Constants.UPPER_SERVO_POS_LIMIT){
+      position = Constants.UPPER_SERVO_POS_LIMIT;
+    }
+
+    if (position < Constants.LOWER_SERVO_POS_LIMIT){
+      position = Constants.LOWER_SERVO_POS_LIMIT;
+    }
+    return position;
+  }
+
+  public boolean servo_at_position(double endPosition){
+    double actuator_1_position = angleActuator_1.getPosition();
+    double actuator_2_position = angleActuator_2.getPosition();
+
+    double actuator_1_position_delta = Math.abs(actuator_1_position - endPosition);
+    double actuator_2_position_delta = Math.abs(actuator_2_position - endPosition);
+
+    return ((actuator_1_position_delta + actuator_2_position_delta) < 0.04);
   }
 
   @Override
