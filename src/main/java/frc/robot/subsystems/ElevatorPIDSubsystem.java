@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 
-public class TurretPIDSubsystem extends PIDSubsystem {
+public class ElevatorPIDSubsystem extends PIDSubsystem {
   /**
-   * Creates a new TurretPIDSubsystem.
+   * Creates a new ElevatorPIDSubsystem.
    */
 
   // private Encoder shootEncoder = new Encoder(sourceA, sourceB);
-  public static WPI_TalonSRX rotateTurretTalon = new WPI_TalonSRX(Constants.ROTATE_TURRET_MOTOR); // This is the CAN ID for the device 
+  // Need two pneumatic actuators and a motor, probably control for the motor
   
-  public TurretPIDSubsystem() {
+  public ElevatorPIDSubsystem() {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
