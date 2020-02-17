@@ -55,12 +55,23 @@ public final class Constants {
 
     // This does not exist yet!
     public static final int ROTATE_TURRET_MOTOR = 10; 
+    public static final int TOP_CONVEYOR_MOTOR = 26;
+    public static final int LOWER_CONVEYOR_MOTOR = 27;
+    public static final int INTAKE_MOTOR = 28;
    
     // Shooter controller CAN IDs
     public static final int ROTATE_SHOOTER_MOTOR_1 = 14;
     public static final int ROTATE_SHOOTER_MOTOR_2 = 15;
     public static final int SPIN_SHOOTER_MOTOR_1 = 12;
     public static final int SPIN_SHOOTER_MOTOR_2 = 13;
+
+    // PWM channels for servo controller linear actuators
+    public static final int LINEAR_ACTUATOR_1 = 1;
+    public static final int LINEAR_ACTUATOR_2 = 2;
+
+    // Position limits for servo linear actuators
+    public static final double UPPER_SERVO_POS_LIMIT = 0.87; // All the way out
+    public static final double LOWER_SERVO_POS_LIMIT = 0.17; // All the way in
 
     // Turret controller CAN IDs
 
@@ -73,5 +84,20 @@ public final class Constants {
     public static final double visionKi = 0.5;
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
+
+    // Calibration of shooter
+    public static final double[] distances = {
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+    }; // feet, need to change to inches
+
+    // Speed (% output) of the shooter motors
+    public static final double[] speeds = {
+      0.66, 0.68, 0.70, 0.75, 0.75, 0.75, 0.80, 0.90, 0.90, 0.90, 0.90, 0.90
+    };
+
+    // Position (PWM command) of the linear actuators
+    public static final double[] position = {
+      0.17, 0.27, 0.37, 0.47, 0.57, 0.67, 0.77, 0.75, 0.80, 0.82, 0.85, 0.87
+    };
 
 }

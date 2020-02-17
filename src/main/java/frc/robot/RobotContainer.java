@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AdjustShooterAngle;
 import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ShiftGear;
@@ -96,6 +97,7 @@ public class RobotContainer {
     // d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
     d_bButton.whileHeld(new TurnLeftShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     d_yButton.whenPressed(new TurnRightShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_yButton.whenPressed(new AdjustShooterAngle(m_shooterSubsystem, m_visionSubsystem));
 
 
   }
