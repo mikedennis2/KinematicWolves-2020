@@ -11,18 +11,17 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AdjustShooterAngle;
 import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
-import frc.robot.commands.ShootBall;
-
 import frc.robot.commands.ShiftGear;
-import frc.robot.subsystems.TurretSubsystem;
-
+import frc.robot.commands.ShootBall;
+import frc.robot.commands.TurnLeftShootTarget;
+import frc.robot.commands.TurnRightShootTarget;
 import frc.robot.subsystems.DriveTrainSubsystem;
-
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 
 
 /**
@@ -85,14 +84,20 @@ public class RobotContainer {
 
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
 
-    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, 1.0));
-    m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.8));
-    m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, 0.6));
+    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
 
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+    final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
+    final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
 
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
-    d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
+    d_xButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    // d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
+    d_bButton.whileHeld(new TurnLeftShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_yButton.whenPressed(new TurnRightShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_yButton.whenPressed(new AdjustShooterAngle(m_shooterSubsystem, m_visionSubsystem));
 
 
   }

@@ -164,8 +164,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("zRotation Rate Commanded by driver", driver_controller.getRawAxis(Constants.left_y_axis));
   }
 
-	public void shiftGear() {
+  public void rotateDrivetrain(double zRotation_rate){
+    drive.arcadeDrive(0, zRotation_rate);
+  }
 
+	public void shiftGear() {
     // Shift gears logic (if we are high gear, downshift, otherwise upshift)
 		if (isHighGear) {
 			shiftToLowGear();
