@@ -19,7 +19,7 @@ public class ShootBall extends CommandBase {
    * Creates a new ShootBall.
    */
 
-  
+
   // The subsystem the command runs on
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
@@ -36,9 +36,8 @@ public class ShootBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
     // double distance = m_visionSubsystem.getDistance(); // TODO: Units, to be inches
-    double distance = 10; // feet
+//     double distance = 10; // feet
     double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
     System.out.print("Speed calculated by table:");
     System.out.print(speed);
