@@ -87,7 +87,7 @@ public final class Constants {
       ArrayList<Translation2d> interiorWaypoints = new ArrayList<Translation2d>();
       interiorWaypoints.add(new Translation2d(0.5,1.0));
       interiorWaypoints.add(new Translation2d(1.5,1.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose,3.5,3.5));
 
       // Define path 1
       startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
@@ -95,6 +95,6 @@ public final class Constants {
       interiorWaypoints = new ArrayList<Translation2d>();
       interiorWaypoints.add(new Translation2d(1.5,-1.0));
       interiorWaypoints.add(new Translation2d(1.5,-2.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose,3.5,3.5));
     }
 }
