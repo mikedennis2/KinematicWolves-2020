@@ -36,7 +36,8 @@ public class ShootBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // double distance = m_visionSubsystem.getDistance(); // TODO: Units, to be inches
+    m_shooterSubsystem.move_top_conveyor(0.5);
+    double distance = m_visionSubsystem.getDistance(); // TODO: Units
 //     double distance = 10; // feet
     double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
     System.out.print("Speed calculated by table:");

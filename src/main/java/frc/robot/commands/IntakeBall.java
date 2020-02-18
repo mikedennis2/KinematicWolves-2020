@@ -8,38 +8,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.Constants;
-import frc.robot.Utilities;
-import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
-public class AdjustShooterAngle extends CommandBase {
+public class IntakeBall extends CommandBase {
   /**
-   * Creates a new AdjustShooterAngle.
+   * Creates a new IntakeBall.
    */
-
-  // Move this to constants so the same array is passed to both commands
-  
-  VisionSubsystem m_visionSubsystem;
-  ShooterSubsystem m_shooterSubsystem;
-  private double targetDistance;
-  private double actuatorPosition;
-
-  public AdjustShooterAngle(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsytem){
-    m_shooterSubsystem = shooterSubsystem;
-    m_visionSubsystem = visionSubsytem;
+  TurretSubsystem m_turretSubsystem;
+  double intakeWheelSpeed;
+  double conveyorSpeed;
+  public IntakeBall(TurretSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
+    this.intakeWheelSpeed = intakeWheelSpeed;
+    this.conveyorSpeed = conveyorSpeed;
+    m_turretSubsystem = turretSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
-    
+    addRequirements(turretSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // m_shooterSubsystem.setLinearActuatorPosition(position);
-    targetDistance = m_visionSubsystem.getFilteredDistance();
-    actuatorPosition = Utilities.linearInterpolation(Constants.distances, Constants.position, targetDistance);
-    m_shooterSubsystem.setLinearActuatorPosition(actuatorPosition);
+        m_turretSubsystem.move_intake_motor(intakeWheelSpeed);
+        m_turretSubsystem.move_lower_conveyor(conveyorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -50,11 +40,13 @@ public class AdjustShooterAngle extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+      m_turretSubsystem.move_intake_motor(0);
+      m_turretSubsystem.move_lower_conveyor(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_shooterSubsystem.servo_at_position(actuatorPosition);
+    return false;
   }
 }

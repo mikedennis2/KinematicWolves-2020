@@ -14,10 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AdjustShooterAngle;
 import frc.robot.commands.AimRobotAtTarget;
 import frc.robot.commands.DriveRobotWithJoysticks;
+import frc.robot.commands.IntakeBall;
 import frc.robot.commands.ShiftGear;
-import frc.robot.commands.ShootBall;
-import frc.robot.commands.TurnLeftShootTarget;
-import frc.robot.commands.TurnRightShootTarget;
+import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -84,9 +83,10 @@ public class RobotContainer {
 
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
 
-    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    m_yButton.whileHeld(new IntakeBall(m_turretSubsystem, 0.7, 0.5));
+    m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
-    m_bButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
 
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
@@ -95,11 +95,9 @@ public class RobotContainer {
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
     // d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
-    d_bButton.whileHeld(new TurnLeftShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    d_yButton.whenPressed(new TurnRightShootTarget(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_bButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_yButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     d_yButton.whenPressed(new AdjustShooterAngle(m_shooterSubsystem, m_visionSubsystem));
-
-
   }
 
 
