@@ -19,7 +19,7 @@ public class NavigationSubsystem extends SubsystemBase {
   }
 
   public Trajectory getTrajectory(int index) {
-    config = new TrajectoryConfig(3.5,3.5); 
+    config = new TrajectoryConfig(Constants.PATH_LIST.get(index).getMaxSpeed(),Constants.PATH_LIST.get(index).getMaxAcceleration()); 
     config.setReversed(true);        
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(Constants.PATH_LIST.get(index).getStartPose(),Constants.PATH_LIST.get(index).getWayPoints(),Constants.PATH_LIST.get(index).getEndPose(),config);
 

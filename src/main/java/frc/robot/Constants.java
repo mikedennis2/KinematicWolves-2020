@@ -94,27 +94,35 @@ public final class Constants {
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
 
-    // Array list that holds trajectories
-    public static ArrayList<HermitClampedCubicPath> PATH_LIST = new ArrayList<HermitClampedCubicPath>();
+    // Define Path 1
+    private static final Pose2d startPose_1 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+    private static final Pose2d endPose_1 = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
+    private static final ArrayList<Translation2d> interiorWaypoints_1 = new ArrayList<Translation2d>() {
+      {
+        add(new Translation2d(0.5,1.0));
+        add(new Translation2d(1.5,1.0));
+      }
+    };
+    private static final HermitClampedCubicPath PATH_1 = new HermitClampedCubicPath(startPose_1,interiorWaypoints_1,endPose_1,3.5,3.5);
 
-    Constants() {
-      // Define path 1
-      Pose2d startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
-      Pose2d endPose = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
-      ArrayList<Translation2d> interiorWaypoints = new ArrayList<Translation2d>();
-      interiorWaypoints.add(new Translation2d(0.5,1.0));
-      interiorWaypoints.add(new Translation2d(1.5,1.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+    // Define Path 2
+    private static final Pose2d startPose_2 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+    private static final Pose2d endPose_2 = new Pose2d(new Translation2d(2.0,-2.0), Rotation2d.fromDegrees(-45));
+    private static final ArrayList<Translation2d> interiorWaypoints_2 = new ArrayList<Translation2d>() {
+      {
+        add(new Translation2d(0.5,-0.5));
+        add(new Translation2d(1.5,-1.0));
+      }
+    };
+    private static final HermitClampedCubicPath PATH_2 = new HermitClampedCubicPath(startPose_2,interiorWaypoints_2,endPose_2,3.5,3.5);
 
-      // Define path 1
-      startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
-      endPose = new Pose2d(new Translation2d(3.0,-2.0), Rotation2d.fromDegrees(180));
-      interiorWaypoints = new ArrayList<Translation2d>();
-      interiorWaypoints.add(new Translation2d(1.5,-1.0));
-      interiorWaypoints.add(new Translation2d(1.5,-2.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
-    }
-
+    // Create array list of paths
+    public static final ArrayList<HermitClampedCubicPath> PATH_LIST = new ArrayList<HermitClampedCubicPath>() {
+      {
+        add(PATH_1);
+        add(PATH_2);
+      }
+    };
 
     // Trajectory following parameters
     public static final double TrackWidth = 23.75; // inches
@@ -143,6 +151,6 @@ public final class Constants {
       0.17, 0.27, 0.37, 0.47, 0.57, 0.67, 0.77, 0.75, 0.80, 0.82, 0.85, 0.87
     };
 
-
-
+    Constants() {
+    }
 }
