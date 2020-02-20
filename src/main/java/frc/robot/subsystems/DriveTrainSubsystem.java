@@ -5,39 +5,43 @@
 package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
-import edu.wpi.first.wpilibj.Encoder;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-
-import frc.robot.Constants;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.SlewRateLimiter;;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   /**
    * Creates a new ExampleSubsystem.
    */
   
+  public SlewRateLimiter rotationFilter = new SlewRateLimiter(Constants.SLEW_RATE_LIMIT_ROTATE);
+  public SlewRateLimiter accelerationFilter = new SlewRateLimiter(Constants.SLEW_RATE_LIMIT_ACCEL);
+
   public double gear_for_traj_following = Constants.GR2; // Assume we want to do trajectory following in second gear
   public double robot_wheel_radius = Units.inchesToMeters(Constants.WheelRadius); // Convert from inches to meters
   public boolean isHighGear = false; // Initialize to low gear
 
-  private final WPI_VictorSPX rightMaster = new WPI_VictorSPX(Constants.RIGHT_MOTOR_1); // This is the CAN ID for the device
-  private final WPI_VictorSPX rightSlave = new WPI_VictorSPX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
-  private final WPI_VictorSPX leftMaster = new WPI_VictorSPX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
-  private final WPI_VictorSPX leftSlave = new WPI_VictorSPX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
+  private final TalonFX rightMaster = new TalonFX(Constants.RIGHT_MOTOR_1); // This is the CAN ID for the device
+  private final TalonFX rightSlave = new TalonFX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
+  private final TalonFX leftMaster = new TalonFX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
+  private final TalonFX leftSlave = new TalonFX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
   private final ADIS16448_IMU imu = new ADIS16448_IMU();
   private final Encoder leftEncoder = new Encoder(Constants.LEFT_ENCODER_channel1A, Constants.LEFT_ENCODER_channel1B);
   private final Encoder rightEncoder = new Encoder(Constants.RIGHT_ENCODER_channel1A, Constants.RIGHT_ENCODER_channel1B);
@@ -124,8 +128,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setOutputVolts(double leftVolts, double rightVolts) {
 
-    leftMaster.set(leftVolts / 12);
-    rightMaster.set(rightVolts / 12);
+    leftMaster.set(ControlMode.PercentOutput, leftVolts / 12);
+    rightMaster.set(ControlMode.PercentOutput, rightVolts / 12);
 
   }
 
@@ -156,6 +160,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // Get axis values for speed and rotational speed
     double xSpeed = driver_controller.getRawAxis(Constants.left_y_axis);
     double zRotation_rate = -1*driver_controller.getRawAxis(Constants.left_x_axis);
+
+    accelerationFilter.calculate(xSpeed);
+    rotationFilter.calculate(zRotation_rate);
 
     // Drive Robot with commanded linear velocity and yaw rate commands
     drive.arcadeDrive(xSpeed, zRotation_rate);
