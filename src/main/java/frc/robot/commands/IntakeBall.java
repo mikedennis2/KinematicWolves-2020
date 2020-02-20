@@ -8,26 +8,28 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
-public class SpinFeederMotors extends CommandBase {
+public class IntakeBall extends CommandBase {
   /**
-   * Creates a new SpinFeederMotors.
+   * Creates a new IntakeBall.
    */
-  private final ShooterSubsystem m_shooterSubsystem;
-  private double speed;
-
-  public SpinFeederMotors(ShooterSubsystem shooterSubsystem, double speed) {
-    m_shooterSubsystem = shooterSubsystem;
+  TurretSubsystem m_turretSubsystem;
+  double intakeWheelSpeed;
+  double conveyorSpeed;
+  public IntakeBall(TurretSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
+    this.intakeWheelSpeed = intakeWheelSpeed;
+    this.conveyorSpeed = conveyorSpeed;
+    m_turretSubsystem = turretSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooterSubsystem);
-    this.speed = speed;
+    addRequirements(turretSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooterSubsystem.spinFeederWheels(speed);
+        m_turretSubsystem.move_intake_motor(intakeWheelSpeed);
+        m_turretSubsystem.move_lower_conveyor(conveyorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,7 +40,8 @@ public class SpinFeederMotors extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.spinFeederWheels(0);
+      m_turretSubsystem.move_intake_motor(0);
+      m_turretSubsystem.move_lower_conveyor(0);
   }
 
   // Returns true when the command should end.
