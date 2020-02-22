@@ -80,11 +80,10 @@ public final class Constants {
     public static final double UPPER_SERVO_POS_LIMIT = 0.87; // All the way out
     public static final double LOWER_SERVO_POS_LIMIT = 0.17; // All the way in
 
-    // Turret controller CAN IDs
-
-
     // Elevation system controller CAN IDs
-
+    public static final int ELEVATOR_TALON_FX = 40;
+    public static final double ELEVATOR_SPEED = 0.6;
+    
     // Controller constants
     public static final double visionPID_Clip = 0.4;
     public static final double visionKp = 0.4;

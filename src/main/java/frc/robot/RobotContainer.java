@@ -11,13 +11,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AdjustShooterAngle;
-import frc.robot.commands.AimRobotAtTarget;
-import frc.robot.commands.DriveRobotWithJoysticks;
-import frc.robot.commands.IntakeBall;
-import frc.robot.commands.ShiftGear;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrainSubsystem;
+//import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
@@ -35,6 +31,7 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  //private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
 
   // Controllers
@@ -80,14 +77,18 @@ public class RobotContainer {
     final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
     final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
+    final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
+    final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
 
-    final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
 
+    //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
+    //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
     m_yButton.whileHeld(new IntakeBall(m_turretSubsystem, 0.7, 0.5));
     m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
-
+    
+    final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
