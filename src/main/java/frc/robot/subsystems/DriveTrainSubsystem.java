@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -38,10 +38,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double robot_wheel_radius = Units.inchesToMeters(Constants.WheelRadius); // Convert from inches to meters
   public boolean isHighGear = false; // Initialize to low gear
 
-  private final TalonFX rightMaster = new TalonFX(Constants.RIGHT_MOTOR_1); // This is the CAN ID for the device
-  private final TalonFX rightSlave = new TalonFX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
-  private final TalonFX leftMaster = new TalonFX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
-  private final TalonFX leftSlave = new TalonFX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
+  private final WPI_TalonFX rightMaster = new WPI_TalonFX(Constants.RIGHT_MOTOR_1); // This is the CAN ID for the device
+  private final WPI_TalonFX rightSlave = new WPI_TalonFX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
+  private final WPI_TalonFX leftMaster = new WPI_TalonFX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
+  private final WPI_TalonFX leftSlave = new WPI_TalonFX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
   private final ADIS16448_IMU imu = new ADIS16448_IMU();
   private final Encoder leftEncoder = new Encoder(Constants.LEFT_ENCODER_channel1A, Constants.LEFT_ENCODER_channel1B);
   private final Encoder rightEncoder = new Encoder(Constants.RIGHT_ENCODER_channel1A, Constants.RIGHT_ENCODER_channel1B);
