@@ -60,11 +60,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem() {      
 
-    leftSlave.setInverted(false);
-    leftMaster.setInverted(false);
+    leftSlave.setInverted(true);
+    leftMaster.setInverted(true);
     
-    rightSlave.setInverted(false);
-    rightMaster.setInverted(false);
+    rightSlave.setInverted(true);
+    rightMaster.setInverted(true);
 
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
