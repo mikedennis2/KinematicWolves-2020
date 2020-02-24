@@ -21,7 +21,7 @@ public class TurretSubsystem extends SubsystemBase {
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
   public TurretSubsystem() {
-
+    intakeTalon.setInverted(true);
   }
 
   
