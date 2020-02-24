@@ -51,10 +51,10 @@ public final class Constants {
     public static final int DRVTRN_SOL_FWD_CHN = 0;
     public static final int DRVTRN_SOL_RVS_CHN = 1;
 
-    public static final int RIGHT_MOTOR_1 = 6;
-    public static final int RIGHT_MOTOR_2 = 7;
-    public static final int LEFT_MOTOR_1 = 4;
-    public static final int LEFT_MOTOR_2 = 5;
+    public static final int RIGHT_MOTOR_1 = 11;
+    public static final int RIGHT_MOTOR_2 = 8;
+    public static final int LEFT_MOTOR_1 = 5;
+    public static final int LEFT_MOTOR_2 = 12;
 
     public static final int LEFT_ENCODER_channel1A = 0;
     public static final int LEFT_ENCODER_channel1B = 1;
