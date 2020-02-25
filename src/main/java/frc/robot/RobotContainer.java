@@ -83,7 +83,7 @@ public class RobotContainer {
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_yButton.whileHeld(new IntakeBall(m_turretSubsystem, 0.7, 0.5));
+    m_yButton.whileHeld(new IntakeBall(m_turretSubsystem, 0.5, 0.5));
     m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     m_aButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
