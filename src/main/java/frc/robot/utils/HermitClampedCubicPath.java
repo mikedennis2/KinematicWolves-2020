@@ -7,11 +7,15 @@ public class HermitClampedCubicPath {
     private Pose2d startPose;
     private Pose2d endPose;
     private ArrayList<Translation2d> interiorWaypoints;
+    private double maxSpeed;
+    private double maxAcceleration;
 
-    public HermitClampedCubicPath(Pose2d startPose, ArrayList<Translation2d> interiorWaypoints, Pose2d endPose) {
+    public HermitClampedCubicPath(Pose2d startPose, ArrayList<Translation2d> interiorWaypoints, Pose2d endPose, double maxSpeed, double maxAcceleration) {
         this.startPose = startPose;
         this.endPose = endPose;
         this.interiorWaypoints = interiorWaypoints;
+        this.maxSpeed = maxSpeed;
+        this.maxAcceleration = maxAcceleration;
     }
 
     public Pose2d getStartPose() {
@@ -30,8 +34,16 @@ public class HermitClampedCubicPath {
         return(interiorWaypoints);
     }
 
-    // Returns path length including terminal points
-    public int getLength() {
+    // Returns node count of the path
+    public int getNodeCount() {
         return(interiorWaypoints.size()+2);
+    }
+
+    public double getMaxSpeed() {
+        return(maxSpeed);
+    }
+
+    public double getMaxAcceleration() {
+        return(maxAcceleration);
     }
 }

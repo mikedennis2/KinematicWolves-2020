@@ -51,10 +51,10 @@ public final class Constants {
     public static final int DRVTRN_SOL_FWD_CHN = 0;
     public static final int DRVTRN_SOL_RVS_CHN = 1;
 
-    public static final int RIGHT_MOTOR_1 = 6;
-    public static final int RIGHT_MOTOR_2 = 7;
-    public static final int LEFT_MOTOR_1 = 4;
-    public static final int LEFT_MOTOR_2 = 5;
+    public static final int RIGHT_MOTOR_1 = 11;
+    public static final int RIGHT_MOTOR_2 = 8;
+    public static final int LEFT_MOTOR_1 = 5;
+    public static final int LEFT_MOTOR_2 = 12;
 
     public static final int LEFT_ENCODER_channel1A = 0;
     public static final int LEFT_ENCODER_channel1B = 1;
@@ -63,16 +63,14 @@ public final class Constants {
 
 
     // This does not exist yet!
-    public static final int ROTATE_TURRET_MOTOR = 10; 
-    public static final int TOP_CONVEYOR_MOTOR = 26;
-    public static final int LOWER_CONVEYOR_MOTOR = 27;
-    public static final int INTAKE_MOTOR = 28;
+    // public static final int ROTATE_TURRET_MOTOR = 10; // Does not exist
+    public static final int TOP_CONVEYOR_MOTOR = 1;
+    public static final int LOWER_CONVEYOR_MOTOR = 4;
+    public static final int INTAKE_MOTOR = 7;
    
     // Shooter controller CAN IDs
-    public static final int ROTATE_SHOOTER_MOTOR_1 = 14;
-    public static final int ROTATE_SHOOTER_MOTOR_2 = 15;
-    public static final int SPIN_SHOOTER_MOTOR_1 = 12;
-    public static final int SPIN_SHOOTER_MOTOR_2 = 13;
+    public static final int SPIN_SHOOTER_MOTOR_1 = 2;
+    public static final int SPIN_SHOOTER_MOTOR_2 = 3;
 
     // PWM channels for servo controller linear actuators
     public static final int LINEAR_ACTUATOR_1 = 1;
@@ -82,11 +80,10 @@ public final class Constants {
     public static final double UPPER_SERVO_POS_LIMIT = 0.87; // All the way out
     public static final double LOWER_SERVO_POS_LIMIT = 0.17; // All the way in
 
-    // Turret controller CAN IDs
-
-
     // Elevation system controller CAN IDs
-
+    public static final int ELEVATOR_TALON_FX = 40;
+    public static final double ELEVATOR_SPEED = 0.6;
+    
     // Controller constants
     public static final double visionPID_Clip = 0.4;
     public static final double visionKp = 0.4;
@@ -94,27 +91,35 @@ public final class Constants {
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
 
-    // Array list that holds trajectories
-    public static ArrayList<HermitClampedCubicPath> PATH_LIST = new ArrayList<HermitClampedCubicPath>();
+    // Define Path 1
+    private static final Pose2d startPose_1 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+    private static final Pose2d endPose_1 = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
+    private static final ArrayList<Translation2d> interiorWaypoints_1 = new ArrayList<Translation2d>() {
+      {
+        add(new Translation2d(0.5,1.0));
+        add(new Translation2d(1.5,1.0));
+      }
+    };
+    private static final HermitClampedCubicPath PATH_1 = new HermitClampedCubicPath(startPose_1,interiorWaypoints_1,endPose_1,3.5,3.5);
 
-    Constants() {
-      // Define path 1
-      Pose2d startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
-      Pose2d endPose = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
-      ArrayList<Translation2d> interiorWaypoints = new ArrayList<Translation2d>();
-      interiorWaypoints.add(new Translation2d(0.5,1.0));
-      interiorWaypoints.add(new Translation2d(1.5,1.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
+    // Define Path 2
+    private static final Pose2d startPose_2 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
+    private static final Pose2d endPose_2 = new Pose2d(new Translation2d(2.0,-2.0), Rotation2d.fromDegrees(-45));
+    private static final ArrayList<Translation2d> interiorWaypoints_2 = new ArrayList<Translation2d>() {
+      {
+        add(new Translation2d(0.5,-0.5));
+        add(new Translation2d(1.5,-1.0));
+      }
+    };
+    private static final HermitClampedCubicPath PATH_2 = new HermitClampedCubicPath(startPose_2,interiorWaypoints_2,endPose_2,3.5,3.5);
 
-      // Define path 1
-      startPose = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
-      endPose = new Pose2d(new Translation2d(3.0,-2.0), Rotation2d.fromDegrees(180));
-      interiorWaypoints = new ArrayList<Translation2d>();
-      interiorWaypoints.add(new Translation2d(1.5,-1.0));
-      interiorWaypoints.add(new Translation2d(1.5,-2.0));
-      PATH_LIST.add(new HermitClampedCubicPath(startPose,interiorWaypoints,endPose));
-    }
-
+    // Create array list of paths
+    public static final ArrayList<HermitClampedCubicPath> PATH_LIST = new ArrayList<HermitClampedCubicPath>() {
+      {
+        add(PATH_1);
+        add(PATH_2);
+      }
+    };
 
     // Trajectory following parameters
     public static final double TrackWidth = 23.75; // inches
@@ -140,9 +145,18 @@ public final class Constants {
 
     // Position (PWM command) of the linear actuators
     public static final double[] position = {
-      0.17, 0.27, 0.37, 0.47, 0.57, 0.67, 0.77, 0.75, 0.80, 0.82, 0.85, 0.87
+      0.85, 0.75, 0.75, 0.65, 0.65, 0.65, 0.55, 0.55, 0.55, 0.45, 0.45, 0.45, 0.45
     };
 
+    // Parameters for vision subsystem
+    public static final float LIMELIGHT_VERTICAL_ANGLE = (float)0.0;    // Limelight vertical angle degrees
+    public static final float LIMELIGHT_HEIGHT = (float)0.0;            // Limelight height from ground
+    public static final float TARGET_HEIGHT = (float)0.0;               // Target height from ground
 
+    // Slew rate limiters
+    public static final double SLEW_RATE_LIMIT_ROTATE = 0.5;
+    public static final double SLEW_RATE_LIMIT_ACCEL = 0.5;
 
+    Constants() {
+    }
 }

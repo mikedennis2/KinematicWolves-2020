@@ -14,6 +14,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.LinearFilter;
 
 import java.lang.Math;
+import frc.robot.Constants;
 
 public class VisionSubsystem extends SubsystemBase {
   /**
@@ -26,10 +27,6 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry ty = table.getEntry("ty");
   private NetworkTableEntry ta = table.getEntry("ta");
   private NetworkTableEntry tv = table.getEntry("tv");
-
-  private final float A1 = (float)0.0;     // Measure, move to other class?
-  private final float H1 = (float)5.01;     // Measure, move to other class?
-  private final float H2 = (float)6.1;     // Measure, move to other class?
 
   private double[] ffGains = {
       0.0008171388625648901,
@@ -102,7 +99,7 @@ public class VisionSubsystem extends SubsystemBase {
     double dist = -1;
     
     if (getCaptureStatus() == 1.0) {
-        dist = (H2-H1)/Math.tan(A1+getVerticalAngle());
+        dist = (Constants.TARGET_HEIGHT-Constants.LIMELIGHT_HEIGHT)/Math.tan(Math.toRadians(Constants.LIMELIGHT_VERTICAL_ANGLE+getVerticalAngle()));
     }
 
     return(dist);

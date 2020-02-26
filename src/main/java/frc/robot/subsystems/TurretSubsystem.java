@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,31 +18,24 @@ public class TurretSubsystem extends SubsystemBase {
    * Creates a new TurretSubsystem.
    */
 
-  public static WPI_TalonSRX rotateTurretTalon = new WPI_TalonSRX(Constants.ROTATE_TURRET_MOTOR); // This is the CAN ID for the device 
-  public static WPI_TalonSRX topConveyorTalon = new WPI_TalonSRX(Constants.TOP_CONVEYOR_MOTOR);
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
   public TurretSubsystem() {
-
+    lowerConveyoorTalon.setNeutralMode(NeutralMode.Coast);
+    intakeTalon.setInverted(true);
   }
 
-  public void move_top_conveyor(double speed){
-      topConveyorTalon.set(speed);
-  }
+  
 
   public void move_lower_conveyor(double speed){
     lowerConveyoorTalon.set(speed);
 
   }
 
-  public void move_intake_motors(double speed){
+  public void move_intake_motor(double speed){
     intakeTalon.set(speed);
 
-  }
-
-  public void rotateTurret(double speed){
-    rotateTurretTalon.set(speed);
   }
 
   @Override

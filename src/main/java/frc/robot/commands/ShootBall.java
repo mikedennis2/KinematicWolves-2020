@@ -36,11 +36,13 @@ public class ShootBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // double distance = m_visionSubsystem.getDistance(); // TODO: Units, to be inches
-//     double distance = 10; // feet
-    double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
-    System.out.print("Speed calculated by table:");
-    System.out.print(speed);
+    m_shooterSubsystem.move_top_conveyor(0.7);
+    // double distance = m_visionSubsystem.getDistance(); // TODO: Units
+    // double distance = 10; // feet
+    // double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
+    double speed = 0.9;  
+    // System.out.print("Speed calculated by table:");
+    // System.out.print(speed);
     // double speed = getInterpolatedSpeed;
     m_shooterSubsystem.shootBall(speed);
   }
@@ -54,6 +56,7 @@ public class ShootBall extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_shooterSubsystem.move_top_conveyor(0);
     m_shooterSubsystem.shootBall(0);
   }
 
