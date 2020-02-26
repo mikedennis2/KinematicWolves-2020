@@ -40,7 +40,7 @@ public class ShootBall extends CommandBase {
     // double distance = m_visionSubsystem.getDistance(); // TODO: Units
     // double distance = 10; // feet
     // double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
-    double speed = 0.5;  
+    double speed = 0.9;  
     // System.out.print("Speed calculated by table:");
     // System.out.print(speed);
     // double speed = getInterpolatedSpeed;
