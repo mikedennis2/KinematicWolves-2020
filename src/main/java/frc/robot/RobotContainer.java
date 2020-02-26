@@ -73,13 +73,13 @@ public class RobotContainer {
      * naming convention: d_* is diver controller, m_* is manipulator controller
      */
 
-    final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
+    //final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
     final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
     final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
     final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
     final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
-
+    final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
@@ -89,11 +89,12 @@ public class RobotContainer {
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
     
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
-    final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+    //final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
+    final JoystickButton d_R1Button = new JoystickButton(driverController, Constants.R1); 
 
-    d_aButton.whenPressed(new ShiftGear(m_driveTrain));
+    d_R1Button.whenPressed(new ShiftGear(m_driveTrain));
     //d_xButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
     // d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
     d_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
