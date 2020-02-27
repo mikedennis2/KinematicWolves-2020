@@ -6,34 +6,42 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 
 public class TurretSubsystem extends SubsystemBase {
   /**
    * Creates a new TurretSubsystem.
    */
-
+  public boolean BallDetected = false;
+  DigitalInput ball_index_sensor = new DigitalInput(Constants.BALL_INDEX_SENSOR_DI_NUM);
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
   public TurretSubsystem() {
+
     lowerConveyoorTalon.setNeutralMode(NeutralMode.Coast);
     intakeTalon.setInverted(true);
+
   }
 
-  
-
   public void move_lower_conveyor(double speed){
-    lowerConveyoorTalon.set(speed);
+
+    BallDetected = ball_index_sensor.get();
+
+    if (BallDetected) {
+			lowerConveyoorTalon.set(speed);;
+		} else {
+			lowerConveyoorTalon.set(0);;
+    }
 
   }
 
   public void move_intake_motor(double speed){
+
     intakeTalon.set(speed);
 
   }
