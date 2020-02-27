@@ -33,14 +33,16 @@ public class IntakeBall extends CommandBase {
   @Override
   public void initialize() {
 
-        m_turretSubsystem.move_intake_motor(intakeWheelSpeed);
-        m_turretSubsystem.move_lower_conveyor(conveyorSpeed);
+      m_turretSubsystem.move_intake_motor(intakeWheelSpeed);
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+      m_turretSubsystem.move_lower_conveyor(conveyorSpeed);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +57,8 @@ public class IntakeBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return false;
+    
   }
 }
