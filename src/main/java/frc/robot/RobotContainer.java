@@ -9,10 +9,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ElevatorPIDSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
@@ -30,7 +31,7 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  //private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+  private final ElevatorPIDSubsystem m_elevatorSubsystem = new ElevatorPIDSubsystem();
 
 
   // Controllers
@@ -55,6 +56,7 @@ public class RobotContainer {
   }
 
   public void setDisabledState(){
+    m_elevatorSubsystem.setSetpoint(0);
     if (m_driveTrain.isHighGear){
       new ShiftGear(m_driveTrain);
     }
@@ -76,9 +78,12 @@ public class RobotContainer {
     // final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
     // final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
-    // final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
-    // final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
+    final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
+    final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
+
+    m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED));
+    m_dPadDown.whenPressed(new RobotClimb(m_elevatorSubsystem));
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
