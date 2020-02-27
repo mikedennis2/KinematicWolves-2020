@@ -143,9 +143,9 @@ public final class Constants {
     };
 
     // Parameters for vision subsystem
-    public static final float LIMELIGHT_VERTICAL_ANGLE = (float)0.0;    // Limelight vertical angle degrees
-    public static final float LIMELIGHT_HEIGHT = (float)0.0;            // Limelight height from ground
-    public static final float TARGET_HEIGHT = (float)0.0;               // Target height from ground
+    public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 0.1745;    // Limelight vertical angle degrees
+    public static final float LIMELIGHT_HEIGHT = (float) 3.0;            // Limelight height from ground
+    public static final float TARGET_HEIGHT = (float) 7.7;               // Target height from ground
 
     // Slew rate limiters
     public static final double SLEW_RATE_LIMIT_ROTATE = 0.1;
@@ -155,7 +155,7 @@ public final class Constants {
 
     // Motor speeds
     public static final double UPPER_CONVEYOR_SPEED = 0.7;
-    public static final double LOWER_CONVEYOR_SPEED = 0.5;
+    public static final double LOWER_CONVEYOR_SPEED = 0.75;
     public static final double INTAKE_WHEEL_SPEED = 0.5;
 
     Constants() {
