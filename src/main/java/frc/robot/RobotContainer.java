@@ -73,11 +73,11 @@ public class RobotContainer {
      */
 
     //final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
-    final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
-    final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
+    // final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
+    // final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
-    final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
-    final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
+    // final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
+    // final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
@@ -92,7 +92,7 @@ public class RobotContainer {
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
     //final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
-    final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
+    // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
