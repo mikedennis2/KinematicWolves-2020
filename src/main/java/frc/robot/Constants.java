@@ -148,8 +148,10 @@ public final class Constants {
     public static final float TARGET_HEIGHT = (float)0.0;               // Target height from ground
 
     // Slew rate limiters
-    public static final double SLEW_RATE_LIMIT_ROTATE = 0.5;
-    public static final double SLEW_RATE_LIMIT_ACCEL = 0.5;
+    public static final double SLEW_RATE_LIMIT_ROTATE = 0.1;
+    public static final double SLEW_RATE_LIMIT_ACCEL = 0.1;
+	  public static final int rbBUTTON = 0;
+	  public static int RB_BUTTON;
 
     // Motor speeds
     public static final double UPPER_CONVEYOR_SPEED = 0.7;
