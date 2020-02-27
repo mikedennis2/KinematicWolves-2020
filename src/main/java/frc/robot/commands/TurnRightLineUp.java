@@ -11,8 +11,8 @@ public class TurnRightLineUp extends SequentialCommandGroup {
             ShooterSubsystem m_shooter) {
         addCommands(
             new TurnUntilTargetFound(m_drivetrain, m_visionSubsystem, true, 0.5),
-            new AimRobotAtTarget(0, m_visionSubsystem, m_drivetrain),
-            new AdjustShooterAngle(m_shooter, m_visionSubsystem)
+            new AimRobotAtTarget(0, m_visionSubsystem, m_drivetrain)//,
+            //new AdjustShooterAngle(m_shooter, m_visionSubsystem)
         );
     }
 }

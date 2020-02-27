@@ -143,7 +143,7 @@ public final class Constants {
     };
 
     // Parameters for vision subsystem
-    public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 0.1745;    // Limelight vertical angle degrees
+    public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 10;    // Limelight vertical angle degrees
     public static final float LIMELIGHT_HEIGHT = (float) 3.0;            // Limelight height from ground
     public static final float TARGET_HEIGHT = (float) 7.7;               // Target height from ground
 
