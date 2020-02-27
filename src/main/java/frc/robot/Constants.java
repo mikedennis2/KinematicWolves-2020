@@ -43,11 +43,6 @@ public final class Constants {
     public static final int left_y_axis = 1;
 
     // Drivetrain controller CAN IDs
-  // Used for Chassis Bot
-//     public static final int RIGHT_MOTOR_1 = 1;
-//     public static final int RIGHT_MOTOR_2 = 3;
-//     public static final int LEFT_MOTOR_1 = 2;
-//     public static final int LEFT_MOTOR_2 = 4;
     public static final int DRVTRN_SOL_FWD_CHN = 0;
     public static final int DRVTRN_SOL_RVS_CHN = 1;
 
@@ -63,7 +58,6 @@ public final class Constants {
 
 
     // This does not exist yet!
-    // public static final int ROTATE_TURRET_MOTOR = 10; // Does not exist
     public static final int TOP_CONVEYOR_MOTOR = 1;
     public static final int LOWER_CONVEYOR_MOTOR = 4;
     public static final int INTAKE_MOTOR = 7;
@@ -156,6 +150,11 @@ public final class Constants {
     // Slew rate limiters
     public static final double SLEW_RATE_LIMIT_ROTATE = 0.5;
     public static final double SLEW_RATE_LIMIT_ACCEL = 0.5;
+
+    // Motor speeds
+    public static final double UPPER_CONVEYOR_SPEED = 0.7;
+    public static final double LOWER_CONVEYOR_SPEED = 0.5;
+    public static final double INTAKE_WHEEL_SPEED = 0.5;
 
     Constants() {
     }
