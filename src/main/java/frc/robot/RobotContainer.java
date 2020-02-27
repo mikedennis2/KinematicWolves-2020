@@ -85,7 +85,7 @@ public class RobotContainer {
     m_aButton.whileHeld(new IntakeBall(m_turretSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
     //m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     //m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    m_yButton.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_turretSubsystem));
     
     // Driver Controller
 

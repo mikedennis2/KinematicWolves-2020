@@ -38,6 +38,10 @@ public class TurretSubsystem extends SubsystemBase {
 
   }
 
+  public void override_Lower_conveyor(double speed){
+    lowerConveyoorTalon.set(speed);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
