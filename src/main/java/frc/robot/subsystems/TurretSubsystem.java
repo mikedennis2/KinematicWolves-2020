@@ -31,11 +31,13 @@ public class TurretSubsystem extends SubsystemBase {
   public void move_lower_conveyor(double speed){
 
     BallDetected = ball_index_sensor.get();
+    System.out.print("Digital Sensor Value:");
+    System.out.print(BallDetected);
 
     if (BallDetected) {
-			lowerConveyoorTalon.set(speed);;
+			lowerConveyoorTalon.set(speed);
 		} else {
-			lowerConveyoorTalon.set(0);;
+			lowerConveyoorTalon.set(0);
     }
 
   }
