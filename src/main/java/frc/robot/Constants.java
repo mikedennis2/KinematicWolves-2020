@@ -148,6 +148,7 @@ public final class Constants {
     public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 0.1745;    // Limelight vertical angle degrees
     public static final float LIMELIGHT_HEIGHT = (float) 3.0;            // Limelight height from ground
     public static final float TARGET_HEIGHT = (float) 7.7;               // Target height from ground
+    public static final double RotationRate = 0.5;
 
     // Slew rate limiters
     public static final double SLEW_RATE_LIMIT_ROTATE = 0.5;
