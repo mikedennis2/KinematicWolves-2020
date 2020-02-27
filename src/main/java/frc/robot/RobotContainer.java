@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.DriveTrainSubsystem;
-//import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
@@ -73,32 +72,33 @@ public class RobotContainer {
      * naming convention: d_* is diver controller, m_* is manipulator controller
      */
 
+    // Unused commands
+
+    // final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
+    // final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
+    // final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
+    // final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
+    // m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
+    // m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
+
+    // Manipulator Controller
+
     final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
-    final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
-    final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
-    final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
-    final JoystickButton m_dPadDown = new JoystickButton(manipulatorController, Constants.D_PAD_DOWN);
 
-
-    //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
-    //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new IntakeBall(m_turretSubsystem, 0.5, 0.5));
-    //m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    //m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    m_aButton.whileHeld(new IntakeBall(m_turretSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
     m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
     
+    // Driver Controller
+
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
-    final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
 
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
-    //d_xButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
-    // d_xButton.whenPressed(new AimRobotAtTarget(0, m_visionSubsystem, m_driveTrain));
     d_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
     d_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    //d_yButton.whenPressed(new AdjustShooterAngle(m_shooterSubsystem, m_visionSubsystem));
+
   }
 
 
