@@ -19,13 +19,15 @@ public class InitializeShooterMotor extends CommandBase {
   // The subsystem the command runs on
   private final ShooterSubsystem m_shooterSubsystem;
   double speed;
-  double timer = 0;
+  double timer;
+  
 
   public InitializeShooterMotor(ShooterSubsystem shooterSubsystem, double speed ) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooterSubsystem = shooterSubsystem;
     addRequirements(m_shooterSubsystem);
     this.speed = speed;
+    this.timer = 0;
   }
 
   // Called when the command is initially scheduled.
@@ -52,6 +54,6 @@ public class InitializeShooterMotor extends CommandBase {
   @Override
   public boolean isFinished() {
     // End when timer is more than 500 ms
-    return (timer > 500);
+    return (timer > 2500);
   }
 }
