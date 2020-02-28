@@ -87,6 +87,8 @@ public final class Constants {
     public static double ELEVATOR_kD = 0;
     public static double ELEVATOR_TOLERANCE = 4.5;
     public static double ElevatorInitialPosition = 0;
+
+    public static int CLIMB_POSITION_COUNTS = 5000;
     
     // Controller constants
     public static final double visionPID_Clip = 0.4;

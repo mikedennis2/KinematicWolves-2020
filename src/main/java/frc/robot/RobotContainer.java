@@ -56,7 +56,7 @@ public class RobotContainer {
   }
 
   public void setDisabledState(){
-    m_elevatorSubsystem.setSetpoint(0);
+    m_elevatorSubsystem.setSetpoint(Constants.CLIMB_POSITION_COUNTS);
     if (m_driveTrain.isHighGear){
       new ShiftGear(m_driveTrain);
     }
