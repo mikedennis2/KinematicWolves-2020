@@ -171,6 +171,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("zRotation Rate Commanded by driver", driver_controller.getRawAxis(Constants.left_y_axis));
   }
 
+  public void move_forward(double speed){
+    drive.arcadeDrive(speed, 0);
+  }
+
   public void rotateDrivetrain(double zRotation_rate){
     drive.arcadeDrive(0, zRotation_rate);
   }
