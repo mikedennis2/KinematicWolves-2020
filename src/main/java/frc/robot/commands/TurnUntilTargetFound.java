@@ -22,10 +22,12 @@ public class TurnUntilTargetFound extends CommandBase {
 
     public TurnUntilTargetFound(DriveTrainSubsystem drivetrain, VisionSubsystem visionSubsystem, boolean direction,
             double rotatationRate) {
+
         m_drivetrain = drivetrain;
         m_visionSubsystem = visionSubsystem;
         this.direction = direction;
         this.rotatationRate = rotatationRate;
+
         // Use addRequirements() here to declare subsystem dependencies.
     }
 
@@ -38,6 +40,7 @@ public class TurnUntilTargetFound extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+
         if (direction) {
             // Rotate in the positive direction, clockwise
             m_drivetrain.rotateDrivetrain(-1 * rotatationRate);
@@ -45,6 +48,7 @@ public class TurnUntilTargetFound extends CommandBase {
             // Rotate in the negative direction, counter-clockwise
             m_drivetrain.rotateDrivetrain(rotatationRate);
         }
+
     }
 
     // Called once the command ends or is interrupted.
@@ -55,6 +59,7 @@ public class TurnUntilTargetFound extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        
         if (m_visionSubsystem.getCaptureStatus() == 1) {
             return true;
         } else {

@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.geometry.*;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
     // Ports on the driver station where the contollers are connected
     public static final int DRIVER_CONTROLLER = 0;
     public static final int MANIPULATOR_CONTROLLER = 1;
@@ -56,7 +57,6 @@ public final class Constants {
     public static final int RIGHT_ENCODER_channel1A = 2;
     public static final int RIGHT_ENCODER_channel1B = 3;
 
-
     // This does not exist yet!
     public static final int TOP_CONVEYOR_MOTOR = 1;
     public static final int LOWER_CONVEYOR_MOTOR = 4;
@@ -76,7 +76,9 @@ public final class Constants {
 
     // Elevation system controller CAN IDs
     public static final int ELEVATOR_TALON_FX = 40;
-    public static final double ELEVATOR_SPEED = 0.6;
+
+    // Digit input
+    public static final int BALL_INDEX_SENSOR_DI_NUM = 9;
     
     // Controller constants
     public static final double visionPID_Clip = 0.4;
@@ -146,6 +148,8 @@ public final class Constants {
     public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 0.1745;    // Limelight vertical angle degrees
     public static final float LIMELIGHT_HEIGHT = (float) 3.0;            // Limelight height from ground
     public static final float TARGET_HEIGHT = (float) 7.7;               // Target height from ground
+    public static final double RotationRate = 0.5;
+
 
     // Slew rate limiters
     public static final double SLEW_RATE_LIMIT_ROTATE = 0.1;
@@ -157,6 +161,7 @@ public final class Constants {
     public static final double UPPER_CONVEYOR_SPEED = 0.7;
     public static final double LOWER_CONVEYOR_SPEED = 0.75;
     public static final double INTAKE_WHEEL_SPEED = 0.5;
+    public static final double ELEVATOR_SPEED = 0.6;
 
     Constants() {
     }

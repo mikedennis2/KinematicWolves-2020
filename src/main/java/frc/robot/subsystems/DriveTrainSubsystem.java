@@ -176,6 +176,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
 	public void shiftGear() {
+    
     // Shift gears logic (if we are high gear, downshift, otherwise upshift)
 		if (isHighGear) {
 			shiftToLowGear();

@@ -34,7 +34,9 @@ public class DriveRobotWithJoysticks extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
       m_drivetrain_subsystem.move_with_joysticks(m_driverController);
+      
   }
 
   // Called once the command ends or is interrupted.
