@@ -32,7 +32,7 @@ public class AutonDriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrainSubsystem.move_forward(-1 * Constants.AUTON_SPEED);
+    m_drivetrainSubsystem.move_forward(Constants.AUTON_SPEED);
     timer += 20;
   }
 
