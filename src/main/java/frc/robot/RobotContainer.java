@@ -63,6 +63,7 @@ public class RobotContainer {
 
   public void setDefaultCommands(){
     m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
+    m_visionSubsystem.turnLimelightOff();
   }
 
   public void setDisabledState(){

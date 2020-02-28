@@ -28,6 +28,9 @@ public class VisionSubsystem extends SubsystemBase {
   private NetworkTableEntry ta = table.getEntry("ta");
   private NetworkTableEntry tv = table.getEntry("tv");
 
+  // LED Mode table
+  private NetworkTableEntry LEDModeEntry = table.getEntry("ledMode");
+
   private double[] ffGains = {
       0.0008171388625648901,
       0.0025796090816614394,
@@ -123,6 +126,14 @@ public class VisionSubsystem extends SubsystemBase {
   // Return filtered distance
   public double getFilteredDistance() {
     return(filtered_distance);
+  }
+
+  public void turnLimelightOn(){
+    LEDModeEntry.setNumber(3);
+  }
+
+  public void turnLimelightOff(){
+    LEDModeEntry.setNumber(1);
   }
 
   @Override
