@@ -96,8 +96,8 @@ public class RobotContainer {
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
     d_aButton.whenPressed(new ShiftGear(m_driveTrain));
-    d_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    d_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_xButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
 
   }
 
