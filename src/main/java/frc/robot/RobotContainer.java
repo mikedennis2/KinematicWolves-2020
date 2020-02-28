@@ -7,11 +7,18 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.*;
+import frc.robot.commands.DriveRobotWithJoysticks;
+import frc.robot.commands.SequentialIntakeBall;
+import frc.robot.commands.ShiftGear;
+import frc.robot.commands.ShootBallSequence;
+import frc.robot.commands.TurnLeftLineUp;
+import frc.robot.commands.TurnRightLineUp;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -31,8 +38,9 @@ public class RobotContainer {
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   //private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-
-
+  
+  private final UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+  
   // Controllers
   private final Joystick driverController = new Joystick(Constants.DRIVER_CONTROLLER);
   private final Joystick manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);  
@@ -44,6 +52,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     setDefaultCommands();
+    camera0.setResolution(Constants.IMG_WIDTH, Constants.IMG_HEIGHT);
   }
 
   public Joystick getJoystick() {

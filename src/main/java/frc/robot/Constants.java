@@ -87,6 +87,10 @@ public final class Constants {
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
 
+    // Camera Constants
+    public static final int IMG_WIDTH = 320;
+    public static final int IMG_HEIGHT = 240;
+
     // Define Path 1
     private static final Pose2d startPose_1 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
     private static final Pose2d endPose_1 = new Pose2d(new Translation2d(2.0,2.0), Rotation2d.fromDegrees(-45));
