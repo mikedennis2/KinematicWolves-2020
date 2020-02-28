@@ -46,7 +46,7 @@ public class ShootBall extends CommandBase {
     // double distance = 10; // feet
     // double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
     
-    double speed = 0.8;  
+    double speed = 0.5;  
     
     // System.out.print("Speed calculated by table:");
     // System.out.print(speed);
@@ -68,6 +68,7 @@ public class ShootBall extends CommandBase {
 
     m_shooterSubsystem.move_top_conveyor(0);
     m_shooterSubsystem.shootBall(0);
+    m_turretSubsystem.move_lower_conveyor(0);
 
   }
 

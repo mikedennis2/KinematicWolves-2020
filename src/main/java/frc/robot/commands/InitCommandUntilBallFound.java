@@ -27,6 +27,7 @@ public class InitCommandUntilBallFound extends CommandBase {
   @Override
   public void initialize() {
     m_turretSubsystem.override_Lower_conveyor(conveyor_speed);
+    m_turretSubsystem.move_intake_motor(conveyor_speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +38,8 @@ public class InitCommandUntilBallFound extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_turretSubsystem.override_Lower_conveyor(0);
+    m_turretSubsystem.move_intake_motor(0);
   }
 
   // Returns true when the command should end.
