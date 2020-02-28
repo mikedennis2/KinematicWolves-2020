@@ -61,6 +61,8 @@ public final class Constants {
     public static final int TOP_CONVEYOR_MOTOR = 1;
     public static final int LOWER_CONVEYOR_MOTOR = 4;
     public static final int INTAKE_MOTOR = 7;
+
+    public static final int PNEUMATIC_CONTROL_MODULE = 9;
    
     // Shooter controller CAN IDs
     public static final int SPIN_SHOOTER_MOTOR_1 = 2;
