@@ -19,8 +19,8 @@ import frc.robot.Constants;
 public class ElevatorPIDSubsystem extends PIDSubsystem {
 
   private final WPI_TalonFX m_elevatorMotor = new WPI_TalonFX(Constants.ELEVATOR_TALON_FX);
-  private final Encoder m_elevatorEncoder = new Encoder(Constants.ELEVATOR_ENCODER_channel1A,
-      Constants.ELEVATOR_ENCODER_channel1B);
+  // private final Encoder m_elevatorEncoder = new Encoder(Constants.ELEVATOR_ENCODER_channel1A,
+  //     Constants.ELEVATOR_ENCODER_channel1B);
 
   double setpoint;
 
@@ -52,13 +52,13 @@ public class ElevatorPIDSubsystem extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // m_elevatorMotor.setVoltage(output + m_elevatorFeedforward.calculate(setpoint));
-    m_elevatorMotor.set(ControlMode.Position, output); // Ouput is encoder ticks
+    m_elevatorMotor.set(ControlMode.Position, setpoint); // Ouput is encoder ticks
     SmartDashboard.putNumber("Elevator Encoder Distance", getMeasurement());
   }
 
   @Override
   public double getMeasurement() {
-    return m_elevatorEncoder.getDistance();
+    return m_elevatorMotor.getSelectedSensorPosition();
   }
 
   public boolean atSetpoint() {
