@@ -28,7 +28,7 @@ public class AutonLineUpShootBall extends SequentialCommandGroup {
     super(
       new AutonDriveForward(drivetrain),
       new TurnLeftLineUp(drivetrain, visionSubsystem, m_shooter),
-      new ShootBallSequence(m_shooter, visionSubsystem, m_turretSubsystem)
+      new AutonShootBall(m_shooter, visionSubsystem, m_turretSubsystem)
 
     );
   }
