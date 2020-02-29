@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutonDriveForward;
+import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ReverseConveyors;
 import frc.robot.commands.SequentialIntakeBall;
@@ -126,7 +126,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    Command m_driveForward = new AutonDriveForward(m_driveTrain);
-    return m_driveForward;
+    Command autonShootBall = new AutonLineUpShootBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem, m_turretSubsystem);
+    return autonShootBall;
   }
 }
