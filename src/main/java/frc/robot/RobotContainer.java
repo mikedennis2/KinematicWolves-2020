@@ -23,6 +23,7 @@ import frc.robot.commands.ShootBallSequence;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
 import frc.robot.commands.TurnRightLineUp;
+import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -108,9 +109,11 @@ public class RobotContainer {
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
     final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
-    // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
+    final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
+    d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
+    m_shooterSubsystem, m_turretSubsystem));
     d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
     // d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
