@@ -54,6 +54,6 @@ public class InitializeShooterMotor extends CommandBase {
   @Override
   public boolean isFinished() {
     // End when timer is more than 500 ms
-    return (timer > 1500);
+    return (timer > 2500);
   }
 }
