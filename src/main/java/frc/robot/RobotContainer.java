@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutonDriveForward;
+import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.commands.DriveRobotWithJoysticks;
 import frc.robot.commands.ReverseConveyors;
 import frc.robot.commands.SequentialIntakeBall;
@@ -23,6 +23,7 @@ import frc.robot.commands.ShootBallSequence;
 import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
 import frc.robot.commands.TurnRightLineUp;
+import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -111,6 +112,8 @@ public class RobotContainer {
     // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
+    // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
+    // m_shooterSubsystem, m_turretSubsystem));
     d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
     // d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
@@ -126,7 +129,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    Command m_driveForward = new AutonDriveForward(m_driveTrain);
-    return m_driveForward;
+    Command autonShootBall = new AutonLineUpShootBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem, m_turretSubsystem);
+    return autonShootBall;
   }
 }

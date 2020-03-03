@@ -18,7 +18,7 @@ public class ShootBallSequence extends SequentialCommandGroup{
 
   public ShootBallSequence(ShooterSubsystem m_shooterSubsystem, VisionSubsystem m_visionSubsystem,
       TurretSubsystem m_turretSubsystem) {
-    addCommands(new InitializeShooterMotor(m_shooterSubsystem, 0.8),
+    addCommands(new InitializeShooterMotor(m_shooterSubsystem, 0.75),
         new ShootBall(m_shooterSubsystem, m_visionSubsystem, m_turretSubsystem)
         );
   }

@@ -8,31 +8,51 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.VisionSubsystem;
+import frc.robot.subsystems.TurretSubsystem;;
 
-public class InitializeShooterMotor extends CommandBase {
+
+public class AutonShootBall extends CommandBase {
   /**
-   * Creates a new InitializeShooterMotor.
+   * Creates a new AutonShootBall.
    */
 
 
   // The subsystem the command runs on
   private final ShooterSubsystem m_shooterSubsystem;
-  double speed;
+  private final VisionSubsystem m_visionSubsystem;
+  private final TurretSubsystem m_turretSubsystem;
   double timer;
-  
 
-  public InitializeShooterMotor(ShooterSubsystem shooterSubsystem, double speed ) {
+  public AutonShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, TurretSubsystem turretSubsystem ) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_turretSubsystem = turretSubsystem;
     m_shooterSubsystem = shooterSubsystem;
+    m_visionSubsystem = visionSubsystem;
     addRequirements(m_shooterSubsystem);
-    this.speed = speed;
-    this.timer = 0;
+    addRequirements(m_visionSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
+    m_shooterSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    m_turretSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    this.timer = 0;
+    
+    // double distance = m_visionSubsystem.getDistance(); // TODO: Units
+    // double distance = 10; // feet
+    // double speed = Utilities.linearInterpolation(Constants.distances, Constants.speeds, distance);
+    
+    double speed = 0.75;  
+    
+    // System.out.print("Speed calculated by table:");
+    // System.out.print(speed);
+    // double speed = getInterpolatedSpeed;
+    
     m_shooterSubsystem.shootBall(speed);
 
   }
@@ -48,12 +68,15 @@ public class InitializeShooterMotor extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
+    m_shooterSubsystem.move_top_conveyor(0);
+    m_shooterSubsystem.shootBall(0);
+    m_turretSubsystem.move_lower_conveyor(0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // End when timer is more than 500 ms
-    return (timer > 2500);
+    return (timer > 7000); // End after 7 seconds
   }
 }

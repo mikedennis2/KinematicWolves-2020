@@ -166,9 +166,9 @@ public final class Constants {
     // Motor speeds
     public static final double UPPER_CONVEYOR_SPEED = 0.7;
     public static final double LOWER_CONVEYOR_SPEED = 0.75;
-    public static final double INTAKE_WHEEL_SPEED = 0.5;
+    public static final double INTAKE_WHEEL_SPEED = 0.4;
     public static final double ELEVATOR_SPEED = 0.6;
-    public static final double AUTON_SPEED = 0.5;
+    public static final double AUTON_SPEED = 0.4;
 
     Constants() {
     }
