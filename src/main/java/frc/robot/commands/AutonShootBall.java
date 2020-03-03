@@ -14,9 +14,9 @@ import frc.robot.subsystems.VisionSubsystem;
 import frc.robot.subsystems.TurretSubsystem;;
 
 
-public class ShootBall extends CommandBase {
+public class AutonShootBall extends CommandBase {
   /**
-   * Creates a new ShootBall.
+   * Creates a new AutonShootBall.
    */
 
 
@@ -24,23 +24,24 @@ public class ShootBall extends CommandBase {
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
   private final TurretSubsystem m_turretSubsystem;
+  double timer;
 
-  public ShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, TurretSubsystem turretSubsystem ) {
+  public AutonShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, TurretSubsystem turretSubsystem ) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turretSubsystem = turretSubsystem;
     m_shooterSubsystem = shooterSubsystem;
     m_visionSubsystem = visionSubsystem;
     addRequirements(m_shooterSubsystem);
     addRequirements(m_visionSubsystem);
-    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    
     m_shooterSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
     m_turretSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    this.timer = 0;
     
     // double distance = m_visionSubsystem.getDistance(); // TODO: Units
     // double distance = 10; // feet
@@ -59,6 +60,7 @@ public class ShootBall extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+      timer += 20;
     
   }
 
@@ -75,6 +77,6 @@ public class ShootBall extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (timer > 7000); // End after 7 seconds
   }
 }

@@ -46,7 +46,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final Encoder leftEncoder = new Encoder(Constants.LEFT_ENCODER_channel1A, Constants.LEFT_ENCODER_channel1B);
   private final Encoder rightEncoder = new Encoder(Constants.RIGHT_ENCODER_channel1A, Constants.RIGHT_ENCODER_channel1B);
 
-  private final DoubleSolenoid DriveTrainSwitch = new DoubleSolenoid(Constants.DRVTRN_SOL_FWD_CHN, Constants.DRVTRN_SOL_RVS_CHN); // This is the definition of the solenoid for switching gears in the drivetrain 
+  private final DoubleSolenoid DriveTrainSwitch = new DoubleSolenoid(Constants.PNEUMATIC_CONTROL_MODULE, Constants.DRVTRN_SOL_FWD_CHN, Constants.DRVTRN_SOL_RVS_CHN); // This is the definition of the solenoid for switching gears in the drivetrain 
 
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
 
@@ -169,6 +169,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     SmartDashboard.putNumber("X speed commanded by driver", driver_controller.getRawAxis(Constants.left_x_axis));
     SmartDashboard.putNumber("zRotation Rate Commanded by driver", driver_controller.getRawAxis(Constants.left_y_axis));
+  }
+
+  public void move_forward(double speed){
+    drive.arcadeDrive(speed, 0);
   }
 
   public void rotateDrivetrain(double zRotation_rate){

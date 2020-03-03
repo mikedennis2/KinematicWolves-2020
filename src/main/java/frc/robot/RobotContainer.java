@@ -7,11 +7,23 @@
 
 package frc.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.*;
+import frc.robot.commands.AutonLineUpShootBall;
+import frc.robot.commands.DriveRobotWithJoysticks;
+import frc.robot.commands.ReverseConveyors;
+import frc.robot.commands.SequentialIntakeBall;
+import frc.robot.commands.ShiftGear;
+import frc.robot.commands.ShootBallSequence;
+import frc.robot.commands.TurnLeftLineUp;
+import frc.robot.commands.TurnLimelightOff;
+import frc.robot.commands.TurnRightLineUp;
+import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -31,8 +43,9 @@ public class RobotContainer {
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   //private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-
-
+  
+  private final UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+  
   // Controllers
   private final Joystick driverController = new Joystick(Constants.DRIVER_CONTROLLER);
   private final Joystick manipulatorController = new Joystick(Constants.MANIPULATOR_CONTROLLER);  
@@ -44,6 +57,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     setDefaultCommands();
+    camera0.setResolution(Constants.IMG_WIDTH, Constants.IMG_HEIGHT);
   }
 
   public Joystick getJoystick() {
@@ -52,12 +66,14 @@ public class RobotContainer {
 
   public void setDefaultCommands(){
     m_driveTrain.setDefaultCommand(new DriveRobotWithJoysticks(m_driveTrain, driverController));
+    m_visionSubsystem.turnLimelightOff();
   }
 
   public void setDisabledState(){
     if (m_driveTrain.isHighGear){
       new ShiftGear(m_driveTrain);
     }
+    m_visionSubsystem.turnLimelightOff();
   }
   /**
    * Use this method to define your button->command mappings.  Buttons can be created by
@@ -73,7 +89,7 @@ public class RobotContainer {
      */
 
     //final JoystickButton m_aButton = new JoystickButton(manipulatorController, Constants.A_BUTTON);
-    // final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
+    final JoystickButton m_bButton = new JoystickButton(manipulatorController, Constants.B_BUTTON);
     // final JoystickButton m_xButton = new JoystickButton(manipulatorController, Constants.X_BUTTON);
     final JoystickButton m_yButton = new JoystickButton(manipulatorController, Constants.Y_BUTTON);
     // final JoystickButton m_dPadUp = new JoystickButton(manipulatorController, Constants.D_PAD_UP);
@@ -82,33 +98,38 @@ public class RobotContainer {
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new IntakeBall(m_turretSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
+    m_aButton.whileHeld(new SequentialIntakeBall(m_turretSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
     //m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    //m_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    m_yButton.whileHeld(new ShootBall(m_shooterSubsystem, m_visionSubsystem));
+    m_bButton.whileHeld(new ReverseConveyors(m_turretSubsystem));
+    m_yButton.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_turretSubsystem));
+  
     
     // Driver Controller
 
     final JoystickButton d_xButton = new JoystickButton(driverController, Constants.X_BUTTON);
-    //final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
+    final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON);
     final JoystickButton d_bButton = new JoystickButton(driverController, Constants.B_BUTTON);
     // final JoystickButton d_yButton = new JoystickButton(driverController, Constants.Y_BUTTON);
-    final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
+    // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
-    d_aButton.whenPressed(new ShiftGear(m_driveTrain));
-    d_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    d_bButton.whenPressed(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
+    // m_shooterSubsystem, m_turretSubsystem));
+    d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
+    // d_aButton.whenPressed(new ShiftGear(m_driveTrain));
+    d_xButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
+    d_bButton.whileHeld(new TurnRightLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
 
   }
 
 
-  // /**
-  //  * Use this to pass the autonomous command to the main {@link Robot} class.
-  //  *
-  //  * @return the command to run in autonomous
-  //  */
-  // public Command getAutonomousCommand() {
-  //   // An ExampleCommand will run in autonomous
-  //   return m_autoCommand;
-  // }
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    Command autonShootBall = new AutonLineUpShootBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem, m_turretSubsystem);
+    return autonShootBall;
+  }
 }

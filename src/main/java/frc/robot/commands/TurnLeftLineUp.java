@@ -12,8 +12,10 @@ public class TurnLeftLineUp extends SequentialCommandGroup {
             ShooterSubsystem m_shooter) {
 
         addCommands(
+            new TurnLimelightOn(m_visionSubsystem),
             new TurnUntilTargetFound(m_drivetrain, m_visionSubsystem, false, Constants.RotationRate),
-            new AimRobotAtTarget(0, m_visionSubsystem, m_drivetrain)
+            new AimRobotAtTarget(0, m_visionSubsystem, m_drivetrain),
+            new TurnLimelightOff(m_visionSubsystem)
         );
 
     }

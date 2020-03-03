@@ -61,6 +61,8 @@ public final class Constants {
     public static final int TOP_CONVEYOR_MOTOR = 1;
     public static final int LOWER_CONVEYOR_MOTOR = 4;
     public static final int INTAKE_MOTOR = 7;
+
+    public static final int PNEUMATIC_CONTROL_MODULE = 9;
    
     // Shooter controller CAN IDs
     public static final int SPIN_SHOOTER_MOTOR_1 = 2;
@@ -86,6 +88,10 @@ public final class Constants {
     public static final double visionKi = 0.5;
     public static final double visionKd = 0.25;
     public static final double alignment_x_tolerance = 0.05;
+
+    // Camera Constants
+    public static final int IMG_WIDTH = 320;
+    public static final int IMG_HEIGHT = 240;
 
     // Define Path 1
     private static final Pose2d startPose_1 = new Pose2d(new Translation2d(0.0,0.0), new Rotation2d(0));
@@ -145,7 +151,7 @@ public final class Constants {
     };
 
     // Parameters for vision subsystem
-    public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 0.1745;    // Limelight vertical angle degrees
+    public static final float LIMELIGHT_VERTICAL_ANGLE = (float) 10;    // Limelight vertical angle degrees
     public static final float LIMELIGHT_HEIGHT = (float) 3.0;            // Limelight height from ground
     public static final float TARGET_HEIGHT = (float) 7.7;               // Target height from ground
     public static final double RotationRate = 0.5;
@@ -160,8 +166,9 @@ public final class Constants {
     // Motor speeds
     public static final double UPPER_CONVEYOR_SPEED = 0.7;
     public static final double LOWER_CONVEYOR_SPEED = 0.75;
-    public static final double INTAKE_WHEEL_SPEED = 0.5;
+    public static final double INTAKE_WHEEL_SPEED = 0.4;
     public static final double ELEVATOR_SPEED = 0.6;
+    public static final double AUTON_SPEED = 0.4;
 
     Constants() {
     }
