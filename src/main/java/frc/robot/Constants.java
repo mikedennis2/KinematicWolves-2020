@@ -158,8 +158,8 @@ public final class Constants {
 
 
     // Slew rate limiters
-    public static final double SLEW_RATE_LIMIT_ROTATE = 0.1;
-    public static final double SLEW_RATE_LIMIT_ACCEL = 0.1;
+    public static final double SLEW_RATE_LIMIT_ROTATE = 1;
+    public static final double SLEW_RATE_LIMIT_ACCEL = 1;
 	  public static final int rbBUTTON = 0;
 	  public static int RB_BUTTON;
 
