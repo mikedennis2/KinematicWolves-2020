@@ -120,11 +120,11 @@ public final class Constants {
 
     // Trajectory following parameters
     public static final double TrackWidth = 23.75; // inches
-    public static final double WheelRadius = 8.00; // inches
+    public static final double WheelRadius = 3.00; // inches
     public static final double TBD = 1.0; // inches
     public static final double EncoderResolution = 2048 / (2 * Math.PI); // number of counts per rad - specs with encoder count per rev - 1 rev = 2*pi rad
-    public static final double GR1 = 9.0; // 1st gear ratio
-    public static final double GR2 = 9.0; // 2nd gear ratio
+    public static final double GR1 = 16.3836; // 1st gear ratio
+    public static final double GR2 = 7.9545; // 2nd gear ratio
     public static final double RobotCharacterization_kS = 0.3; // static gain
     public static final double RobotCharacterization_kV = 1.96; // velocity gain
     public static final double RobotCharacterization_kA = 0.06; // acceleration gain

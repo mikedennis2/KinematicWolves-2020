@@ -32,7 +32,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public SlewRateLimiter rotationFilter = new SlewRateLimiter(Constants.SLEW_RATE_LIMIT_ROTATE);
   public SlewRateLimiter accelerationFilter = new SlewRateLimiter(Constants.SLEW_RATE_LIMIT_ACCEL);
 
-  public double gear_for_traj_following = Constants.GR2; // Assume we want to do trajectory following in second gear
+  public double gear_for_traj_following = Constants.GR1; // Assume we want to do trajectory following in second gear
   public double robot_wheel_radius = Units.inchesToMeters(Constants.WheelRadius); // Convert from inches to meters
   public boolean isHighGear = false; // Initialize to low gear
 
@@ -147,6 +147,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leftDistance = ( (leftMaster.getSelectedSensorPosition() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius; // m
     rightDistance = ( (rightMaster.getSelectedSensorPosition() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius; // m
 
+    //
+    SmartDashboard.putNumber("Left Distance", leftDistance);
     // Update pose
     pose = odometry.update(GetAngle(), leftDistance, rightDistance);
 
