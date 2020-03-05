@@ -7,10 +7,8 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -42,44 +40,40 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final WPI_TalonFX rightSlave = new WPI_TalonFX(Constants.RIGHT_MOTOR_2); // This is the CAN ID for the device
   private final WPI_TalonFX leftMaster = new WPI_TalonFX(Constants.LEFT_MOTOR_1); // This is the CAN ID for the device
   private final WPI_TalonFX leftSlave = new WPI_TalonFX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
-  private final ADIS16448_IMU imu = new ADIS16448_IMU();
-  private final Encoder leftEncoder = new Encoder(Constants.LEFT_ENCODER_channel1A, Constants.LEFT_ENCODER_channel1B);
-  private final Encoder rightEncoder = new Encoder(Constants.RIGHT_ENCODER_channel1A, Constants.RIGHT_ENCODER_channel1B);
+
+  private final ADIS16448_IMU imu = new ADIS16448_IMU(); // This is the gyroscope definition
 
   private final DoubleSolenoid DriveTrainSwitch = new DoubleSolenoid(Constants.PNEUMATIC_CONTROL_MODULE, Constants.DRVTRN_SOL_FWD_CHN, Constants.DRVTRN_SOL_RVS_CHN); // This is the definition of the solenoid for switching gears in the drivetrain 
 
+  // Trajectory following objects
   private final DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
-
   private final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(Units.inchesToMeters(Constants.TrackWidth));
   private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(GetAngle());
   private Pose2d pose = new Pose2d();
-
   private final SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.RobotCharacterization_kS, Constants.RobotCharacterization_kV, Constants.RobotCharacterization_kA);
   private final PIDController leftPIDController = new PIDController(Constants.Traj_Following_Feedback_P_Gain, 0, 0);
   private final PIDController rightPIDController = new PIDController(Constants.Traj_Following_Feedback_P_Gain, 0, 0);
 
   public DriveTrainSubsystem() {      
 
+    // Set motor inversion state
     leftSlave.setInverted(true);
     leftMaster.setInverted(true);
-    
     rightSlave.setInverted(true);
     rightMaster.setInverted(true);
 
+    // Set master slave relation
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
 
-    leftEncoder.setDistancePerPulse(2 * Math.PI / Constants.EncoderResolution);
-    rightEncoder.setDistancePerPulse(2 * Math.PI / Constants.EncoderResolution);
-
-    leftEncoder.reset();
-    rightEncoder.reset();
+    // Reset gyroscope
     imu.reset();
 
   }
 
   public Rotation2d GetAngle() {
 
+    // Get angle measurement
     return Rotation2d.fromDegrees(-imu.getAngle());
 
   }
@@ -90,8 +84,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double right_wheel_speed; // m/s
 
     // Calculate wheel speeds
-    left_wheel_speed = (leftEncoder.getRate() / gear_for_traj_following) * robot_wheel_radius;
-    right_wheel_speed = (rightEncoder.getRate() / gear_for_traj_following) * robot_wheel_radius;
+    // Note: getSelectedSensorVelocity returns cts per 100ms, need to divide by 100 to get cts per ms, multiply by 1000 to get cts per seconds
+    left_wheel_speed = 10 * ( (leftMaster.getSelectedSensorVelocity() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius;
+    right_wheel_speed = 10 * ( (rightMaster.getSelectedSensorVelocity() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius;
 
     // Return DifferentialDriveWheelSpeeds object
     return new DifferentialDriveWheelSpeeds(left_wheel_speed, right_wheel_speed);
@@ -99,7 +94,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveKinematics getKinematics() {
+
     return kinematics;
+    
   }
 
   public Pose2d getPose() {
@@ -147,8 +144,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
     double rightDistance;
 
     // Update distance traveled
-    leftDistance = (leftEncoder.getDistance() / gear_for_traj_following) * robot_wheel_radius; // m
-    rightDistance = (rightEncoder.getDistance() / gear_for_traj_following) * robot_wheel_radius; // m
+    leftDistance = ( (leftMaster.getSelectedSensorPosition() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius; // m
+    rightDistance = ( (rightMaster.getSelectedSensorPosition() / Constants.EncoderResolution) / gear_for_traj_following) * robot_wheel_radius; // m
 
     // Update pose
     pose = odometry.update(GetAngle(), leftDistance, rightDistance);
