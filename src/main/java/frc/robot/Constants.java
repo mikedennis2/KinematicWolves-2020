@@ -52,11 +52,6 @@ public final class Constants {
     public static final int LEFT_MOTOR_1 = 5;
     public static final int LEFT_MOTOR_2 = 12;
 
-    public static final int LEFT_ENCODER_channel1A = 0;
-    public static final int LEFT_ENCODER_channel1B = 1;
-    public static final int RIGHT_ENCODER_channel1A = 2;
-    public static final int RIGHT_ENCODER_channel1B = 3;
-
     // This does not exist yet!
     public static final int TOP_CONVEYOR_MOTOR = 1;
     public static final int LOWER_CONVEYOR_MOTOR = 4;
@@ -127,7 +122,7 @@ public final class Constants {
     public static final double TrackWidth = 23.75; // inches
     public static final double WheelRadius = 8.00; // inches
     public static final double TBD = 1.0; // inches
-    public static final double EncoderResolution = 4096; // number of pulses per revolution
+    public static final double EncoderResolution = 2048 / (2 * Math.PI); // number of counts per rad - specs with encoder count per rev - 1 rev = 2*pi rad
     public static final double GR1 = 9.0; // 1st gear ratio
     public static final double GR2 = 9.0; // 2nd gear ratio
     public static final double RobotCharacterization_kS = 0.3; // static gain
