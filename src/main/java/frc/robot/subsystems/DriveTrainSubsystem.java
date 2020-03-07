@@ -7,10 +7,12 @@ package frc.robot.subsystems;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.analog.adis16448.frc.ADIS16448_IMU.IMUAxis;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -37,7 +39,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final WPI_TalonFX leftSlave = new WPI_TalonFX(Constants.LEFT_MOTOR_2); // This is the CAN ID for the device
 
   // IMU definition
-  private final ADIS16448_IMU imu = new ADIS16448_IMU(); // This is the gyroscope definition
+  private final ADIS16448_IMU imu = new ADIS16448_IMU(IMUAxis.kX, SPI.Port.kMXP, 4); // This is the gyroscope definition
 
   // Hydraulics definition
   private final DoubleSolenoid DriveTrainSwitch = new DoubleSolenoid(Constants.PNEUMATIC_CONTROL_MODULE, Constants.DRVTRN_SOL_FWD_CHN, Constants.DRVTRN_SOL_RVS_CHN); // This is the definition of the solenoid for switching gears in the drivetrain 
@@ -76,13 +78,20 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leftMaster.setInverted(true);
     rightSlave.setInverted(true);
     rightMaster.setInverted(true);
+    rightMaster.configOpenloopRamp(Constants.DRIVE_CURRENT_RAMP_TIME);
+    leftMaster.configOpenloopRamp(Constants.DRIVE_CURRENT_RAMP_TIME);
+
+    leftMaster.setNeutralMode(NeutralMode.Coast);
+    leftSlave.setNeutralMode(NeutralMode.Coast);
+    rightMaster.setNeutralMode(NeutralMode.Coast);
+    rightSlave.setNeutralMode(NeutralMode.Coast);
 
     // Set master slave relation
     rightSlave.follow(rightMaster);
     leftSlave.follow(leftMaster);
 
     // Set yaw axis
-    imu.setYawAxis(IMUAxis.kX);
+    
 
     // Reset gyroscope
     imu.reset();
@@ -191,7 +200,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     rotationFilter.calculate(zRotation_rate);
 
     // Drive Robot with commanded linear velocity and yaw rate commands
-    drive.arcadeDrive(xSpeed, zRotation_rate);
+    drive.arcadeDrive(xSpeed, zRotation_rate, true);
 
     SmartDashboard.putNumber("X speed commanded by driver", driver_controller.getRawAxis(Constants.left_x_axis));
     SmartDashboard.putNumber("zRotation Rate Commanded by driver", driver_controller.getRawAxis(Constants.left_y_axis));
