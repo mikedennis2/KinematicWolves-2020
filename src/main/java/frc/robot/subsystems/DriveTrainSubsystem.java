@@ -82,7 +82,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     leftSlave.follow(leftMaster);
 
     // Set yaw axis
-    imu.setYawAxis(IMUAxis.kY);
+    imu.setYawAxis(IMUAxis.kX);
 
     // Reset gyroscope
     imu.reset();
