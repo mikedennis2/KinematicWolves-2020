@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -22,13 +22,13 @@ public class AutonLineUpShootBall extends SequentialCommandGroup {
    * Creates a new AutonLineUpShootBall.
    */
   public AutonLineUpShootBall(DriveTrainSubsystem drivetrain, VisionSubsystem visionSubsystem,
-      ShooterSubsystem m_shooter, TurretSubsystem m_turretSubsystem) {
+      ShooterSubsystem m_shooter, ConveyorSubsystem m_conveyorSubsystem) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super(
       new AutonDriveForward(drivetrain),
       new TurnLeftLineUp(drivetrain, visionSubsystem, m_shooter),
-      new AutonShootBall(m_shooter, visionSubsystem, m_turretSubsystem)
+      new AutonShootBall(m_shooter, visionSubsystem, m_conveyorSubsystem)
 
     );
   }

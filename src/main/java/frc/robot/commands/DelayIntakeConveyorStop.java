@@ -8,7 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 
 public class DelayIntakeConveyorStop extends CommandBase {
   /**
@@ -17,21 +17,21 @@ public class DelayIntakeConveyorStop extends CommandBase {
 
 
   // The subsystem the command runs on
-  private final TurretSubsystem m_turretSubsystem;
+  private final ConveyorSubsystem m_conveyorSubsystem;
   double conveyor_speed;
   double timer = 0;
 
-  public DelayIntakeConveyorStop(TurretSubsystem turretSubsystem, double conveyor_speed ) {
+  public DelayIntakeConveyorStop(ConveyorSubsystem turretSubsystem, double conveyor_speed ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_turretSubsystem = turretSubsystem;
-    addRequirements(m_turretSubsystem);
+    m_conveyorSubsystem = turretSubsystem;
+    addRequirements(m_conveyorSubsystem);
     this.conveyor_speed = conveyor_speed;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_turretSubsystem.override_Lower_conveyor(conveyor_speed);
+    m_conveyorSubsystem.override_Lower_conveyor(conveyor_speed);
 
   }
 
@@ -45,7 +45,7 @@ public class DelayIntakeConveyorStop extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_turretSubsystem.override_Lower_conveyor(0);
+    m_conveyorSubsystem.override_Lower_conveyor(0);
 
   }
 

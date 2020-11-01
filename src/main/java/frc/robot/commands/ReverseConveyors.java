@@ -9,15 +9,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 
 public class ReverseConveyors extends CommandBase {
   /**
    * Creates a new ReverseConveyors.
    */
-  TurretSubsystem m_turretSubsystem;
-  public ReverseConveyors(TurretSubsystem turretSubsystem) {
-    this.m_turretSubsystem = turretSubsystem;
+  ConveyorSubsystem m_conveyorSubsystem;
+  public ReverseConveyors(ConveyorSubsystem turretSubsystem) {
+    this.m_conveyorSubsystem = turretSubsystem;
     addRequirements(turretSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -25,8 +25,8 @@ public class ReverseConveyors extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_turretSubsystem.move_intake_motor(-1 * Constants.INTAKE_WHEEL_SPEED);
-    m_turretSubsystem.move_lower_conveyor(-1 * Constants.LOWER_CONVEYOR_SPEED);
+    m_conveyorSubsystem.move_intake_motor(-1 * Constants.INTAKE_WHEEL_SPEED);
+    m_conveyorSubsystem.move_lower_conveyor(-1 * Constants.LOWER_CONVEYOR_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,8 +37,8 @@ public class ReverseConveyors extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_turretSubsystem.move_intake_motor(0);
-    m_turretSubsystem.move_lower_conveyor(0);
+    m_conveyorSubsystem.move_intake_motor(0);
+    m_conveyorSubsystem.move_lower_conveyor(0);
   }
 
   // Returns true when the command should end.

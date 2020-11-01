@@ -13,16 +13,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
-public class TurretSubsystem extends SubsystemBase {
+public class ConveyorSubsystem extends SubsystemBase {
   /**
-   * Creates a new TurretSubsystem.
+   * Creates a new ConveyorSubsystem.
    */
   public boolean BallNotDetected = true;
   DigitalInput ball_index_sensor = new DigitalInput(Constants.BALL_INDEX_SENSOR_DI_NUM);
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
-  public TurretSubsystem() {
+  public ConveyorSubsystem() {
 
     lowerConveyoorTalon.setNeutralMode(NeutralMode.Coast);
     intakeTalon.setInverted(true);

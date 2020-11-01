@@ -8,21 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 
 public class IntakeBall extends CommandBase {
   /**
    * Creates a new IntakeBall.
    */
-  TurretSubsystem m_turretSubsystem;
+  ConveyorSubsystem m_conveyorSubsystem;
   double intakeWheelSpeed;
   double conveyorSpeed;
 
-  public IntakeBall(TurretSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
+  public IntakeBall(ConveyorSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
     
     this.intakeWheelSpeed = intakeWheelSpeed;
     this.conveyorSpeed = conveyorSpeed;
-    m_turretSubsystem = turretSubsystem;
+    m_conveyorSubsystem = turretSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(turretSubsystem);
@@ -33,7 +33,7 @@ public class IntakeBall extends CommandBase {
   @Override
   public void initialize() {
 
-      m_turretSubsystem.move_intake_motor(intakeWheelSpeed);
+      m_conveyorSubsystem.move_intake_motor(intakeWheelSpeed);
 
   }
 
@@ -41,7 +41,7 @@ public class IntakeBall extends CommandBase {
   @Override
   public void execute() {
 
-      m_turretSubsystem.move_lower_conveyor(conveyorSpeed);
+      m_conveyorSubsystem.move_lower_conveyor(conveyorSpeed);
 
   }
 
@@ -49,8 +49,8 @@ public class IntakeBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-      m_turretSubsystem.move_intake_motor(0);
-      m_turretSubsystem.move_lower_conveyor(0);
+      m_conveyorSubsystem.move_intake_motor(0);
+      m_conveyorSubsystem.move_lower_conveyor(0);
 
   }
 

@@ -26,7 +26,7 @@ import frc.robot.commands.TurnRightLineUp;
 import frc.robot.commands.AutonLineUpShootBall;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
 
 
@@ -38,7 +38,7 @@ import frc.robot.subsystems.VisionSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
+  private final ConveyorSubsystem m_conveyorSubsystem = new ConveyorSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final VisionSubsystem m_visionSubsystem = new VisionSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
@@ -98,10 +98,10 @@ public class RobotContainer {
 
     //m_dPadUp.whileHeld(new MoveElevator(m_elevatorSubsystem, Constants.ELEVATOR_SPEED);
     //m_dPadDown.whileHeld(new MoveElevator(m_elevatorSubsystem, -1 * Constants.ELEVATOR_SPEED));
-    m_aButton.whileHeld(new SequentialIntakeBall(m_turretSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
+    m_aButton.whileHeld(new SequentialIntakeBall(m_conveyorSubsystem, Constants.INTAKE_WHEEL_SPEED, Constants.LOWER_CONVEYOR_SPEED));
     //m_xButton.whenPressed(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
-    m_bButton.whileHeld(new ReverseConveyors(m_turretSubsystem));
-    m_yButton.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_turretSubsystem));
+    m_bButton.whileHeld(new ReverseConveyors(m_conveyorSubsystem));
+    m_yButton.whileHeld(new ShootBallSequence(m_shooterSubsystem, m_visionSubsystem, m_conveyorSubsystem));
   
     
     // Driver Controller
@@ -113,7 +113,7 @@ public class RobotContainer {
     // final JoystickButton d_aButton = new JoystickButton(driverController, Constants.A_BUTTON); 
 
     // d_yButton.whenPressed(new AutonLineUpShootBall(m_driveTrain,  m_visionSubsystem,
-    // m_shooterSubsystem, m_turretSubsystem));
+    // m_shooterSubsystem, m_conveyorSubsystem));
     d_aButton.whenPressed(new TurnLimelightOff(m_visionSubsystem));
     // d_aButton.whenPressed(new ShiftGear(m_driveTrain));
     d_xButton.whileHeld(new TurnLeftLineUp(m_driveTrain, m_visionSubsystem, m_shooterSubsystem));
@@ -129,7 +129,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    Command autonShootBall = new AutonLineUpShootBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem, m_turretSubsystem);
+    Command autonShootBall = new AutonLineUpShootBall(m_driveTrain, m_visionSubsystem, m_shooterSubsystem, m_conveyorSubsystem);
     return autonShootBall;
   }
 }

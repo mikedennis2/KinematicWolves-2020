@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.VisionSubsystem;
-import frc.robot.subsystems.TurretSubsystem;;
+import frc.robot.subsystems.ConveyorSubsystem;;
 
 
 public class AutonShootBall extends CommandBase {
@@ -23,12 +23,12 @@ public class AutonShootBall extends CommandBase {
   // The subsystem the command runs on
   private final ShooterSubsystem m_shooterSubsystem;
   private final VisionSubsystem m_visionSubsystem;
-  private final TurretSubsystem m_turretSubsystem;
+  private final ConveyorSubsystem m_conveyorSubsystem;
   double timer;
 
-  public AutonShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, TurretSubsystem turretSubsystem ) {
+  public AutonShootBall(ShooterSubsystem shooterSubsystem, VisionSubsystem visionSubsystem, ConveyorSubsystem turretSubsystem ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_turretSubsystem = turretSubsystem;
+    m_conveyorSubsystem = turretSubsystem;
     m_shooterSubsystem = shooterSubsystem;
     m_visionSubsystem = visionSubsystem;
     addRequirements(m_shooterSubsystem);
@@ -40,7 +40,7 @@ public class AutonShootBall extends CommandBase {
   public void initialize() {
     
     m_shooterSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
-    m_turretSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    m_conveyorSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
     this.timer = 0;
     
     // double distance = m_visionSubsystem.getDistance(); // TODO: Units
@@ -70,7 +70,7 @@ public class AutonShootBall extends CommandBase {
 
     m_shooterSubsystem.move_top_conveyor(0);
     m_shooterSubsystem.shootBall(0);
-    m_turretSubsystem.move_lower_conveyor(0);
+    m_conveyorSubsystem.move_lower_conveyor(0);
 
   }
 
