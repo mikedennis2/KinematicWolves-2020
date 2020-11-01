@@ -21,9 +21,9 @@ public class DelayIntakeConveyorStop extends CommandBase {
   double conveyor_speed;
   double timer = 0;
 
-  public DelayIntakeConveyorStop(ConveyorSubsystem turretSubsystem, double conveyor_speed ) {
+  public DelayIntakeConveyorStop(ConveyorSubsystem conveyorSubsystem, double conveyor_speed ) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_conveyorSubsystem = turretSubsystem;
+    m_conveyorSubsystem = conveyorSubsystem;
     addRequirements(m_conveyorSubsystem);
     this.conveyor_speed = conveyor_speed;
   }

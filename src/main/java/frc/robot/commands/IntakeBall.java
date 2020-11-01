@@ -18,14 +18,14 @@ public class IntakeBall extends CommandBase {
   double intakeWheelSpeed;
   double conveyorSpeed;
 
-  public IntakeBall(ConveyorSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
+  public IntakeBall(ConveyorSubsystem conveyorSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
     
     this.intakeWheelSpeed = intakeWheelSpeed;
     this.conveyorSpeed = conveyorSpeed;
-    m_conveyorSubsystem = turretSubsystem;
+    m_conveyorSubsystem = conveyorSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(turretSubsystem);
+    addRequirements(conveyorSubsystem);
 
   }
 

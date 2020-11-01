@@ -14,11 +14,11 @@ public class SequentialIntakeBall extends SequentialCommandGroup {
   /**
    * Add your docs here.
    */
-  public SequentialIntakeBall(ConveyorSubsystem turretSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
+  public SequentialIntakeBall(ConveyorSubsystem conveyorSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
     addCommands(
-      new InitCommandUntilBallFound(turretSubsystem, conveyorSpeed),
-      new IntakeBall(turretSubsystem, intakeWheelSpeed, conveyorSpeed),
-      new DelayIntakeConveyorStop(turretSubsystem, conveyorSpeed)
+      new InitCommandUntilBallFound(conveyorSubsystem, conveyorSpeed),
+      new IntakeBall(conveyorSubsystem, intakeWheelSpeed, conveyorSpeed),
+      new DelayIntakeConveyorStop(conveyorSubsystem, conveyorSpeed)
     );
     // Add Commands here:
     // e.g. addSequential(new Command1());

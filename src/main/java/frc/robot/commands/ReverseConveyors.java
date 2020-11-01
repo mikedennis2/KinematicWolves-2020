@@ -16,9 +16,9 @@ public class ReverseConveyors extends CommandBase {
    * Creates a new ReverseConveyors.
    */
   ConveyorSubsystem m_conveyorSubsystem;
-  public ReverseConveyors(ConveyorSubsystem turretSubsystem) {
-    this.m_conveyorSubsystem = turretSubsystem;
-    addRequirements(turretSubsystem);
+  public ReverseConveyors(ConveyorSubsystem conveyorSubsystem) {
+    this.m_conveyorSubsystem = conveyorSubsystem;
+    addRequirements(conveyorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

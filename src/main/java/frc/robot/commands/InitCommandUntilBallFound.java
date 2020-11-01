@@ -17,8 +17,8 @@ public class InitCommandUntilBallFound extends CommandBase {
   ConveyorSubsystem m_conveyorSubsystem;
   double conveyor_speed;
 
-  public InitCommandUntilBallFound(ConveyorSubsystem turretSubsystem, double speed) {
-    this.m_conveyorSubsystem = turretSubsystem;
+  public InitCommandUntilBallFound(ConveyorSubsystem conveyorSubsystem, double speed) {
+    this.m_conveyorSubsystem = conveyorSubsystem;
     this.conveyor_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
   }
