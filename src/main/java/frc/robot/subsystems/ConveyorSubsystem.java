@@ -105,6 +105,10 @@ public class ConveyorSubsystem extends SubsystemBase {
     nextBallPosition += 1;
   }
 
+  public void resetNextBallPosition(){
+    nextBallPosition = 2;
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

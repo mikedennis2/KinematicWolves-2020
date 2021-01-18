@@ -74,6 +74,7 @@ public class ShootBall extends CommandBase {
     m_conveyorSubsystem.override_top_conveyor(0);
     m_shooterSubsystem.shootBall(0);
     m_conveyorSubsystem.override_Lower_conveyor(0);
+    m_conveyorSubsystem.resetNextBallPosition();
 
   }
 
