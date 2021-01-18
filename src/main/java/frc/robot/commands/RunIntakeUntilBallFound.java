@@ -37,7 +37,6 @@ public class RunIntakeUntilBallFound extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_conveyorSubsystem.override_Lower_conveyor(0); // I don't think this is necessary
     m_conveyorSubsystem.move_intake_motor(0);
   }
 

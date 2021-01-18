@@ -33,6 +33,7 @@ public class ConveyorSubsystem extends SubsystemBase {
   DigitalInput ballIndexSensor4 = new DigitalInput(Constants.BALL_INDEX_SENSOR_4_DI_NUM);
   
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
+  public static WPI_TalonSRX topConveyorTalon = new WPI_TalonSRX(Constants.TOP_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
   public ConveyorSubsystem() {
@@ -42,13 +43,34 @@ public class ConveyorSubsystem extends SubsystemBase {
 
   }
 
-  public void move_lower_conveyor(double speed){
-    if (!ballNotDetectedSensor1) {
-			lowerConveyoorTalon.set(speed);
-		} else {
-			lowerConveyoorTalon.set(0);
-    }
+  public void move_top_conveyor(double speed, int nextPosition) {
+    if (nextPosition == 3){
+      if (!ballNotDetectedSensor3) {
+        topConveyorTalon.set(speed);
+      } else {
+        topConveyorTalon.set(0);
+      }
 
+    }
+    else if (nextPosition == 4){
+      if (!ballNotDetectedSensor4) {
+        topConveyorTalon.set(speed);
+      } else {
+        topConveyorTalon.set(0);
+      }
+    }
+    else{
+      topConveyorTalon.set(0);
+    }
+  }
+
+  public void move_lower_conveyor(double speed){
+    // Run until a ball gets to sensor #2
+    if (!ballNotDetectedSensor2) {
+      lowerConveyoorTalon.set(speed);
+    } else {
+      lowerConveyoorTalon.set(0);
+    }
   }
 
   public void move_intake_motor(double speed){
@@ -66,6 +88,10 @@ public class ConveyorSubsystem extends SubsystemBase {
     lowerConveyoorTalon.set(speed);
   }
 
+  public void override_top_conveyor(double speed){
+    topConveyorTalon.set(speed);
+  }
+
   public boolean is_full(){
     // If the next ball should go to "position 5", it is full
     return (nextBallPosition == 5);
@@ -74,7 +100,11 @@ public class ConveyorSubsystem extends SubsystemBase {
   public int getNextBallPosition(){
     return nextBallPosition;
   }
-  
+
+  public void incrementNextBallPosition(){
+    nextBallPosition += 1;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
