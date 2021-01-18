@@ -17,8 +17,21 @@ public class ConveyorSubsystem extends SubsystemBase {
   /**
    * Creates a new ConveyorSubsystem.
    */
-  public boolean BallNotDetected = true;
-  DigitalInput ball_index_sensor = new DigitalInput(Constants.BALL_INDEX_SENSOR_DI_NUM);
+
+  // Keep track of where balls are place
+  // emptySlots = {position at sensor 2, position at sensor 3, position at sensor 4}
+  public boolean ballNotDetectedSensor1 = true;
+  public boolean ballNotDetectedSensor2 = true;
+  public boolean ballNotDetectedSensor3 = true;
+  public boolean ballNotDetectedSensor4 = true;
+
+  public int nextBallPosition = 2; 
+
+  DigitalInput ballIndexSensor1 = new DigitalInput(Constants.BALL_INDEX_SENSOR_1_DI_NUM);
+  DigitalInput ballIndexSensor2 = new DigitalInput(Constants.BALL_INDEX_SENSOR_2_DI_NUM);
+  DigitalInput ballIndexSensor3 = new DigitalInput(Constants.BALL_INDEX_SENSOR_3_DI_NUM);
+  DigitalInput ballIndexSensor4 = new DigitalInput(Constants.BALL_INDEX_SENSOR_4_DI_NUM);
+  
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
@@ -30,8 +43,7 @@ public class ConveyorSubsystem extends SubsystemBase {
   }
 
   public void move_lower_conveyor(double speed){
-    
-    if (!BallNotDetected) {
+    if (!ballNotDetectedSensor1) {
 			lowerConveyoorTalon.set(speed);
 		} else {
 			lowerConveyoorTalon.set(0);
@@ -40,19 +52,40 @@ public class ConveyorSubsystem extends SubsystemBase {
   }
 
   public void move_intake_motor(double speed){
-
-    intakeTalon.set(speed);
-
+    if (is_full()){
+      // All three positions have a ball
+      intakeTalon.set(0); // Do not let the intake spin
+    }
+    else{
+      intakeTalon.set(speed);  
+    }
+    
   }
 
   public void override_Lower_conveyor(double speed){
     lowerConveyoorTalon.set(speed);
   }
 
+  public boolean is_full(){
+    // If the next ball should go to "position 5", it is full
+    return (nextBallPosition == 5);
+  }
+
+  public int getNextBallPosition(){
+    return nextBallPosition;
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    BallNotDetected = ball_index_sensor.get();
-    SmartDashboard.putBoolean("Digital Sensor Value:", BallNotDetected);
+    ballNotDetectedSensor1 = ballIndexSensor1.get();
+    ballNotDetectedSensor2 = ballIndexSensor2.get();
+    ballNotDetectedSensor3 = ballIndexSensor3.get();
+    ballNotDetectedSensor4 = ballIndexSensor4.get();
+
+    SmartDashboard.putBoolean("ballNotDetectedSensor1", ballNotDetectedSensor1);
+    SmartDashboard.putBoolean("ballNotDetectedSensor2", ballNotDetectedSensor2);
+    SmartDashboard.putBoolean("ballNotDetectedSensor3", ballNotDetectedSensor3);
+    SmartDashboard.putBoolean("ballNotDetectedSensor4", ballNotDetectedSensor4);
   }
 }

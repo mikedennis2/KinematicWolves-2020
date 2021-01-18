@@ -16,7 +16,7 @@ public class SequentialIntakeBall extends SequentialCommandGroup {
    */
   public SequentialIntakeBall(ConveyorSubsystem conveyorSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
     addCommands(
-      new InitCommandUntilBallFound(conveyorSubsystem, conveyorSpeed),
+      new RunIntakeUntilBallFound(conveyorSubsystem, conveyorSpeed),
       new IntakeBall(conveyorSubsystem, intakeWheelSpeed, conveyorSpeed),
       new DelayIntakeConveyorStop(conveyorSubsystem, conveyorSpeed)
     );
