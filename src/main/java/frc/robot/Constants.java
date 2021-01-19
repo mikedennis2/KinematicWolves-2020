@@ -77,7 +77,11 @@ public final class Constants {
     public static final int ELEVATOR_TALON_FX = 6;
 
     // Digit input
-    public static final int BALL_INDEX_SENSOR_DI_NUM = 9;
+    public static final int BALL_INDEX_SENSOR_1_DI_NUM = 9;
+    public static final int BALL_INDEX_SENSOR_2_DI_NUM = 9;
+    public static final int BALL_INDEX_SENSOR_3_DI_NUM = 9;
+    public static final int BALL_INDEX_SENSOR_4_DI_NUM = 9;
+
     
     // Controller constants
     public static final double visionPID_Clip = 0.4;

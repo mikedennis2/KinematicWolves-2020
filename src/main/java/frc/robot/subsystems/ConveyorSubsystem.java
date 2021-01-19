@@ -17,8 +17,17 @@ public class ConveyorSubsystem extends SubsystemBase {
   /**
    * Creates a new ConveyorSubsystem.
    */
-  public boolean BallNotDetected = true;
-  DigitalInput ball_index_sensor = new DigitalInput(Constants.BALL_INDEX_SENSOR_DI_NUM);
+  public boolean ballNotDetectedSensor1 = true;
+  public boolean ballNotDetectedSensor2 = true;
+  public boolean ballNotDetectedSensor3 = true;
+  public boolean ballNotDetectedSensor4 = true;
+
+  DigitalInput ballIndexSensor1 = new DigitalInput(Constants.BALL_INDEX_SENSOR_1_DI_NUM);
+  DigitalInput ballIndexSensor2 = new DigitalInput(Constants.BALL_INDEX_SENSOR_2_DI_NUM);
+  DigitalInput ballIndexSensor3 = new DigitalInput(Constants.BALL_INDEX_SENSOR_3_DI_NUM);
+  DigitalInput ballIndexSensor4 = new DigitalInput(Constants.BALL_INDEX_SENSOR_4_DI_NUM);
+
+
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
@@ -31,7 +40,7 @@ public class ConveyorSubsystem extends SubsystemBase {
 
   public void move_lower_conveyor(double speed){
     
-    if (!BallNotDetected) {
+    if (!ballNotDetectedSensor1) {
 			lowerConveyoorTalon.set(speed);
 		} else {
 			lowerConveyoorTalon.set(0);
@@ -52,7 +61,13 @@ public class ConveyorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    BallNotDetected = ball_index_sensor.get();
-    SmartDashboard.putBoolean("Digital Sensor Value:", BallNotDetected);
+    ballNotDetectedSensor1 = ballIndexSensor1.get();
+    ballNotDetectedSensor2 = ballIndexSensor2.get();
+    ballNotDetectedSensor3 = ballIndexSensor3.get();
+    ballNotDetectedSensor4 = ballIndexSensor4.get();
+    SmartDashboard.putBoolean("Digital Sensor 1 Value:", ballNotDetectedSensor1);
+    SmartDashboard.putBoolean("Digital Sensor 2 Value:", ballNotDetectedSensor2);
+    SmartDashboard.putBoolean("Digital Sensor 3 Value:", ballNotDetectedSensor3);
+    SmartDashboard.putBoolean("Digital Sensor 4 Value:", ballNotDetectedSensor4);
   }
 }
