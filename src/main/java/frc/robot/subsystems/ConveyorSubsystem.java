@@ -27,7 +27,8 @@ public class ConveyorSubsystem extends SubsystemBase {
   DigitalInput ballIndexSensor3 = new DigitalInput(Constants.BALL_INDEX_SENSOR_3_DI_NUM);
   DigitalInput ballIndexSensor4 = new DigitalInput(Constants.BALL_INDEX_SENSOR_4_DI_NUM);
 
-
+  public int nextBallPosition = 2;
+  
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
 
@@ -58,6 +59,10 @@ public class ConveyorSubsystem extends SubsystemBase {
     lowerConveyoorTalon.set(speed);
   }
 
+  public int get_next_ball_position() {
+    return nextBallPosition;
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
