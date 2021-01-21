@@ -39,7 +39,7 @@ public class AutonShootBall extends CommandBase {
   @Override
   public void initialize() {
     
-    m_shooterSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
+    m_conveyorSubsystem.move_top_conveyor(Constants.UPPER_CONVEYOR_SPEED);
     m_conveyorSubsystem.override_Lower_conveyor(Constants.UPPER_CONVEYOR_SPEED);
     this.timer = 0;
     
@@ -68,7 +68,7 @@ public class AutonShootBall extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    m_shooterSubsystem.move_top_conveyor(0);
+    m_conveyorSubsystem.move_top_conveyor(0);
     m_shooterSubsystem.shootBall(0);
     m_conveyorSubsystem.move_lower_conveyor(0);
 

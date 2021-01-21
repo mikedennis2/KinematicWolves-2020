@@ -31,12 +31,17 @@ public class ConveyorSubsystem extends SubsystemBase {
   
   public static WPI_TalonSRX lowerConveyoorTalon = new WPI_TalonSRX(Constants.LOWER_CONVEYOR_MOTOR);
   public static WPI_TalonSRX intakeTalon = new WPI_TalonSRX(Constants.INTAKE_MOTOR);
+  public static WPI_TalonSRX topConveyorTalon = new WPI_TalonSRX(Constants.TOP_CONVEYOR_MOTOR);
 
   public ConveyorSubsystem() {
 
     lowerConveyoorTalon.setNeutralMode(NeutralMode.Coast);
     intakeTalon.setInverted(true);
 
+  }
+  
+  public void move_top_conveyor(double speed) {
+    topConveyorTalon.set(speed);
   }
 
   public void move_lower_conveyor(double speed){
@@ -62,7 +67,7 @@ public class ConveyorSubsystem extends SubsystemBase {
   public int get_next_ball_position() {
     return nextBallPosition;
   }
-  
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

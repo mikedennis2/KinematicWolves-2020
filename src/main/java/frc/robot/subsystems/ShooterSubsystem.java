@@ -21,7 +21,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public static WPI_TalonSRX spinShooterTalon_1 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_1); // This is the CAN ID for the device 
   public static WPI_TalonSRX spinShooterTalon_2 = new WPI_TalonSRX(Constants.SPIN_SHOOTER_MOTOR_2); // This is the CAN ID for the device 
-  public static WPI_TalonSRX topConveyorTalon = new WPI_TalonSRX(Constants.TOP_CONVEYOR_MOTOR);
   public static Servo angleActuator_1 = new Servo(Constants.LINEAR_ACTUATOR_1); // PWM controlled
   public static Servo angleActuator_2 = new Servo(Constants.LINEAR_ACTUATOR_2); // PWM controlled
 
@@ -44,9 +43,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   }
 
-  public void move_top_conveyor(double speed) {
-    topConveyorTalon.set(speed);
-  }
   private double clipLinearActuatorPositionCommand(double position){
     // Make sure command does not exceed the hardware limit
     if (position > Constants.UPPER_SERVO_POS_LIMIT){
