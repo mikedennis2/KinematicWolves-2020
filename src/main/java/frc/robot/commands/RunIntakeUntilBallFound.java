@@ -10,14 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ConveyorSubsystem;
 
-public class InitCommandUntilBallFound extends CommandBase {
+public class RunIntakeUntilBallFound extends CommandBase {
   /**
-   * Creates a new InitCommandUntilBallFound.
+   * Creates a new RunIntakeUntilBallFound.
    */
   ConveyorSubsystem m_conveyorSubsystem;
   double conveyor_speed;
 
-  public InitCommandUntilBallFound(ConveyorSubsystem conveyorSubsystem, double speed) {
+  public RunIntakeUntilBallFound(ConveyorSubsystem conveyorSubsystem, double speed) {
     this.m_conveyorSubsystem = conveyorSubsystem;
     this.conveyor_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,7 +26,6 @@ public class InitCommandUntilBallFound extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_conveyorSubsystem.override_Lower_conveyor(conveyor_speed);
     m_conveyorSubsystem.move_intake_motor(conveyor_speed);
   }
 
@@ -38,7 +37,6 @@ public class InitCommandUntilBallFound extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_conveyorSubsystem.override_Lower_conveyor(0);
     m_conveyorSubsystem.move_intake_motor(0);
   }
 

@@ -21,6 +21,10 @@ public class ConveyorSubsystem extends SubsystemBase {
   public boolean ballNotDetectedSensor2 = true;
   public boolean ballNotDetectedSensor3 = true;
   public boolean ballNotDetectedSensor4 = true;
+ 
+  //                                       [Index 0]                  [Index 1]              [Index 2]               [Index 3]
+  // Add a boolean array containing each of the ballNotDetectedSensor readings
+  public boolean[] ballNotDetectedArray = {ballNotDetectedSensor1, ballNotDetectedSensor2, ballNotDetectedSensor3, ballNotDetectedSensor4};
 
   DigitalInput ballIndexSensor1 = new DigitalInput(Constants.BALL_INDEX_SENSOR_1_DI_NUM);
   DigitalInput ballIndexSensor2 = new DigitalInput(Constants.BALL_INDEX_SENSOR_2_DI_NUM);
@@ -34,30 +38,41 @@ public class ConveyorSubsystem extends SubsystemBase {
   public static WPI_TalonSRX topConveyorTalon = new WPI_TalonSRX(Constants.TOP_CONVEYOR_MOTOR);
 
   public ConveyorSubsystem() {
-
     lowerConveyoorTalon.setNeutralMode(NeutralMode.Coast);
     intakeTalon.setInverted(true);
-
   }
   
   public void move_top_conveyor(double speed) {
     topConveyorTalon.set(speed);
   }
-
+  
+  // Update this method to only move the lower conveyor (no checks in place)
   public void move_lower_conveyor(double speed){
-    
-    if (!ballNotDetectedSensor1) {
-			lowerConveyoorTalon.set(speed);
-		} else {
-			lowerConveyoorTalon.set(0);
-    }
+    lowerConveyoorTalon.set(speed);
+  }
 
+  /*
+  Create a method to adjust the ball position. This will happen after a ball has been
+  taken in by the intake (and found by sensor 1). This method will have two different
+  scenarios it must handle. 
+
+  1. When it only needs to move the lower conveyor (hint, first ball it takes in)
+  2. When it needs to move both conveyors at once (hint, second or third ball that is taken in)
+  */
+  public void adjust_ball_positioning(double speed){
+    if (nextBallPosition == 2){
+      // Called when the ball needs to move to position 2
+      lowerConveyoorTalon.set(speed);
+    }
+    else{
+      // Called when the ball needs to move to position 3 or 4
+      lowerConveyoorTalon.set(speed);
+      topConveyorTalon.set(speed);
+    }
   }
 
   public void move_intake_motor(double speed){
-
     intakeTalon.set(speed);
-
   }
 
   public void override_Lower_conveyor(double speed){
@@ -66,6 +81,25 @@ public class ConveyorSubsystem extends SubsystemBase {
 
   public int get_next_ball_position() {
     return nextBallPosition;
+  }
+
+  /*
+  We need a method to increment the ball position after one is taken in.
+  This will be called after a ball is moved to its desired position.
+  */
+  public void increment_ball_position(){
+    nextBallPosition += 1;
+  }
+
+  /*
+  We need a method to tell us if the ball is at the desired position. Hint,
+  this is why we created the boolean array earlier!
+  */
+  public boolean ball_at_desired_position(){
+    // This method gets called when the intake is running
+    // Tells the command when to stop
+    nextBallPositionIndex = nextBallPosition - 1;
+    return !ballNotDetectedArray[nextBallPositionIndex];
   }
 
   @Override

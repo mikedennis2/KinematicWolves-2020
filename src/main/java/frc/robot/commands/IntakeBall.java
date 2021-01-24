@@ -19,46 +19,43 @@ public class IntakeBall extends CommandBase {
   double conveyorSpeed;
 
   public IntakeBall(ConveyorSubsystem conveyorSubsystem, double intakeWheelSpeed, double conveyorSpeed) {
-    
-    this.intakeWheelSpeed = intakeWheelSpeed;
+    // Do we need the intake wheel to spin with this command?
+
     this.conveyorSpeed = conveyorSpeed;
     m_conveyorSubsystem = conveyorSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(conveyorSubsystem);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-      m_conveyorSubsystem.move_intake_motor(intakeWheelSpeed);
-
+    // Same question, do we need the intake wheel to spin?
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-      m_conveyorSubsystem.move_lower_conveyor(conveyorSpeed);
-
+    // What should we do instead of only moving the lower conveyor?
+    m_conveyorSubsystem.adjust_ball_positioning(conveyorSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
-      m_conveyorSubsystem.move_intake_motor(0);
-      m_conveyorSubsystem.move_lower_conveyor(0);
+    // What needs to happen when this command ends?
+    m_conveyorSubsystem.increment_ball_position();
+    m_conveyorSubsystem.move_lower_conveyor(0);
+    m_conveyorSubsystem.move_top_conveyor(0);
 
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-    return false;
+    // How do we know if the command is finished? Is there a method that tells us this in ConveyorSubsystem?
+    return m_conveyorSubsystem.ball_at_desired_position();
     
   }
 }
