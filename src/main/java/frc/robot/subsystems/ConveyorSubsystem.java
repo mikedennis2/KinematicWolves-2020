@@ -17,14 +17,14 @@ public class ConveyorSubsystem extends SubsystemBase {
   /**
    * Creates a new ConveyorSubsystem.
    */
-  public boolean ballNotDetectedSensor1 = true;
-  public boolean ballNotDetectedSensor2 = true;
-  public boolean ballNotDetectedSensor3 = true;
-  public boolean ballNotDetectedSensor4 = true;
+  public boolean ballDetectedSensor1 = false;
+  public boolean ballDetectedSensor2 = false;
+  public boolean ballDetectedSensor3 = false;
+  public boolean ballDetectedSensor4 = false;
  
   //                                       [Index 0]                  [Index 1]              [Index 2]               [Index 3]
-  // Add a boolean array containing each of the ballNotDetectedSensor readings
-  // public boolean[] ballNotDetectedArray = 
+  // Add a boolean array containing each of the ballDetectedSensor readings
+  // public boolean[] ballDetectedArray = 
 
   DigitalInput ballIndexSensor1 = new DigitalInput(Constants.BALL_INDEX_SENSOR_1_DI_NUM);
   DigitalInput ballIndexSensor2 = new DigitalInput(Constants.BALL_INDEX_SENSOR_2_DI_NUM);
@@ -96,13 +96,13 @@ public class ConveyorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    ballNotDetectedSensor1 = ballIndexSensor1.get();
-    ballNotDetectedSensor2 = ballIndexSensor2.get();
-    ballNotDetectedSensor3 = ballIndexSensor3.get();
-    ballNotDetectedSensor4 = ballIndexSensor4.get();
-    SmartDashboard.putBoolean("Digital Sensor 1 Value:", ballNotDetectedSensor1);
-    SmartDashboard.putBoolean("Digital Sensor 2 Value:", ballNotDetectedSensor2);
-    SmartDashboard.putBoolean("Digital Sensor 3 Value:", ballNotDetectedSensor3);
-    SmartDashboard.putBoolean("Digital Sensor 4 Value:", ballNotDetectedSensor4);
+    ballDetectedSensor1 = !ballIndexSensor1.get();
+    ballDetectedSensor2 = !ballIndexSensor2.get();
+    ballDetectedSensor3 = !ballIndexSensor3.get();
+    ballDetectedSensor4 = !ballIndexSensor4.get();
+    SmartDashboard.putBoolean("Digital Sensor 1 Value:", ballDetectedSensor1);
+    SmartDashboard.putBoolean("Digital Sensor 2 Value:", ballDetectedSensor2);
+    SmartDashboard.putBoolean("Digital Sensor 3 Value:", ballDetectedSensor3);
+    SmartDashboard.putBoolean("Digital Sensor 4 Value:", ballDetectedSensor4);
   }
 }

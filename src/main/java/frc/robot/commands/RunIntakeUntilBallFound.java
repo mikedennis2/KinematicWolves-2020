@@ -45,6 +45,6 @@ public class RunIntakeUntilBallFound extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !m_conveyorSubsystem.ballNotDetectedSensor1;
+    return m_conveyorSubsystem.ballDetectedSensor1;
   }
 }
