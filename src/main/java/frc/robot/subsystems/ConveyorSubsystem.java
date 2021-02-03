@@ -93,6 +93,17 @@ public class ConveyorSubsystem extends SubsystemBase {
     
   }
 
+  public void move_conveyors(double motorOutput){
+    if (!ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput);
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(motorOutput);
+    }
+    else if (){
+
+    }
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
