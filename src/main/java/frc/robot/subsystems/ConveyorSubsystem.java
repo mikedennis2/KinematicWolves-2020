@@ -93,15 +93,88 @@ public class ConveyorSubsystem extends SubsystemBase {
     
   }
 
-  public void move_conveyors(double motorOutput){
+  public void move_conveyors(double motorOutput){ 
     if (!ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
-      lowerConveyoorTalon.set(motorOutput);
+      lowerConveyoorTalon.set(motorOutput); //state 1
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(motorOutput);
+    } 
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //state 2
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //state 3
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(0);
+      }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //state 4
+      intakeTalon.set(0);
+      topConveyorTalon.set(motorOutput);
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //done 1
       intakeTalon.set(motorOutput);
       topConveyorTalon.set(motorOutput);
     }
-    else if (){
-
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //done 2
+      intakeTalon.set(0);
+      topConveyorTalon.set(motorOutput);
     }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); // state 5
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(0);
+    }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //state 6
+      intakeTalon.set(0);
+      topConveyorTalon.set(motorOutput);
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //done 3
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(0);
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //done 4
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //done 5
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(0);
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //done 6
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); //done 7
+      intakeTalon.set(motorOutput);
+      topConveyorTalon.set(0);
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(motorOutput); // done 8
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //state 7
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      lowerConveyoorTalon.set(0); //done 9
+      intakeTalon.set(0);
+      topConveyorTalon.set(0);
+    }
+
   }
 
   @Override
