@@ -89,9 +89,9 @@ public class ConveyorSubsystem extends SubsystemBase {
   - This method gets called when the intake is running
   - Tells the command when to stop
   */
-  public boolean ball_at_desired_position(){
+  //public boolean ball_at_desired_position(){
     
-  }
+  //}
 
   @Override
   public void periodic() {
