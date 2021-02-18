@@ -177,6 +177,57 @@ public class ConveyorSubsystem extends SubsystemBase {
 
   }
 
+  public String find_truth_table_state(){
+    if (!ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      return "state 1";
+    } 
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      return "state 2";
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      return "state 3";
+      }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && !ballDetectedSensor4){
+      return "state 4";
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      return "done 1";
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      return "done 2";
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      return " state 5";
+    }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && !ballDetectedSensor4){
+      return "state 6";
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 3";
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 4";
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && !ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 5";
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 6";
+    }
+    else if (!ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 7";
+    }
+    else if (ballDetectedSensor1 && !ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      return " done 8";
+    }
+    else if (!ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      return "state 7";
+    }
+    else if (ballDetectedSensor1 && ballDetectedSensor2 && ballDetectedSensor3 && ballDetectedSensor4){
+      return "done 9";
+    }
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -188,5 +239,6 @@ public class ConveyorSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Digital Sensor 2 Value:", ballDetectedSensor2);
     SmartDashboard.putBoolean("Digital Sensor 3 Value:", ballDetectedSensor3);
     SmartDashboard.putBoolean("Digital Sensor 4 Value:", ballDetectedSensor4);
+    SmartDashboard.putString("Truth table line: ", find_truth_table_state());
   }
 }
