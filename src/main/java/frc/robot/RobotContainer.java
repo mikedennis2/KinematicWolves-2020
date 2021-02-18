@@ -24,6 +24,7 @@ import frc.robot.commands.TurnLeftLineUp;
 import frc.robot.commands.TurnLimelightOff;
 import frc.robot.commands.TurnRightLineUp;
 import frc.robot.commands.AutonLineUpShootBall;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ConveyorSubsystem;
